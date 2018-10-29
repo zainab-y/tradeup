@@ -44,3 +44,5 @@ Provide an overview and description of your Source control process.
 * Discuss and analyse requirements related to information system security.
 * Discuss methods you will use to protect information and data.
 Research what your legal obligations are in relation to handling user data.
+
+more changes
