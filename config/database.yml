@@ -80,6 +80,4 @@ test:
 #
 production:
   <<: *default
-  database: tradeup_production
-  username: tradeup
-  password: <%= ENV['TRADEUP_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
