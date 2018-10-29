@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_29_065725) do
+ActiveRecord::Schema.define(version: 2018_10_29_070537) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,10 @@ ActiveRecord::Schema.define(version: 2018_10_29_065725) do
     t.datetime "tenant_available_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "job_categories_id"
+    t.bigint "job_statuses_id"
+    t.index ["job_categories_id"], name: "index_jobs_on_job_categories_id"
+    t.index ["job_statuses_id"], name: "index_jobs_on_job_statuses_id"
   end
 
   create_table "user_jobs", force: :cascade do |t|
@@ -65,6 +69,8 @@ ActiveRecord::Schema.define(version: 2018_10_29_065725) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "jobs", "job_categories", column: "job_categories_id"
+  add_foreign_key "jobs", "job_statuses", column: "job_statuses_id"
   add_foreign_key "user_jobs", "jobs"
   add_foreign_key "user_jobs", "users"
 end
