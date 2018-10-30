@@ -38,7 +38,7 @@ class JobsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to job_url(@job)
   end
 
-  test "should destroy job" do
+  test "should delete job" do
     assert_difference('Job.count', -1) do
       delete job_url(@job)
     end

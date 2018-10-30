@@ -5,9 +5,9 @@
 <table>
   <thead>
     <tr>
-      <th>Title</th>
+      <th>TradeUp</th>
       <th>Description</th>
-      <th>Tenant available time</th>
+      <th>Tenant's available time</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -18,9 +18,9 @@
         <td><%= job.title %></td>
         <td><%= job.description %></td>
         <td><%= job.tenant_available_time %></td>
-        <td><%= link_to 'Show', job %></td>
-        <td><%= link_to 'Edit', edit_job_path(job) %></td>
-        <td><%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Preview', job %></td>
+        <td><%= link_to 'Edit Job', edit_job_path(job) %></td>
+        <td><%= link_to 'Delete Job', job, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
