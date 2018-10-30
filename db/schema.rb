@@ -12,6 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2018_10_29_232500) do
 
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -80,6 +81,18 @@ ActiveRecord::Schema.define(version: 2018_10_29_232500) do
     t.index ["user_id"], name: "index_user_jobs_on_user_id"
   end
 
+  create_table "user_profiles", force: :cascade do |t|
+    t.text "bio"
+    t.string "contact"
+    t.string "abn"
+    t.string "insurance"
+    t.string "name"
+    t.bigint "address_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["address_id"], name: "index_user_profiles_on_address_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -97,4 +110,5 @@ ActiveRecord::Schema.define(version: 2018_10_29_232500) do
   add_foreign_key "jobs", "job_statuses"
   add_foreign_key "user_jobs", "jobs"
   add_foreign_key "user_jobs", "users"
+  add_foreign_key "user_profiles", "addresses"
 end
