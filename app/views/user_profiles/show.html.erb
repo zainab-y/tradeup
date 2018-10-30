@@ -1,4 +1,29 @@
 <p id="notice"><%= notice %></p>
 
+<p>
+  <strong>Name:</strong>
+  <%= @user_profile.name %>
+</p>
+
+<p>
+  <strong>Bio:</strong>
+  <%= @user_profile.bio %>
+</p>
+
+<p>
+  <strong>Contact number:</strong>
+  <%= @user_profile.contact %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @user_profile.user.email %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @user_profile.street %>, <%= @user_profile.suburb %>, <%= @user_profile.postcode %>
+</p>
+
 <%= link_to 'Edit', edit_user_profile_path(@user_profile) %> |
 <%= link_to 'Back', user_profiles_path %>
