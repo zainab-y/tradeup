@@ -21,13 +21,13 @@ class JobsController < ApplicationController
 
   # GET /jobs/1/edit
   def edit
-    authorize @job
   end
 
   # POST /jobs
   # POST /jobs.json
   def create
     @job = Job.new(job_params)
+    @job.user = current_user
 
     respond_to do |format|
       if @job.save
