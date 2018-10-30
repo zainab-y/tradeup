@@ -20,6 +20,7 @@ class JobsController < ApplicationController
 
   # GET /jobs/1/edit
   def edit
+    authorize @job
   end
 
   # POST /jobs
