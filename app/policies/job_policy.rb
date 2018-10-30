@@ -6,7 +6,7 @@ class JobPolicy < ApplicationPolicy
     @job = job
   end
 
-  def update?
+  def edit?
     @user == @job.user
   end
 

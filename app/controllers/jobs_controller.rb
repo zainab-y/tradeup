@@ -1,7 +1,7 @@
 class JobsController < ApplicationController
   before_action :set_job, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
-  
+  after_action :create_user_job, only: [:create]
 
   # GET /jobs
   # GET /jobs.json
@@ -21,13 +21,13 @@ class JobsController < ApplicationController
 
   # GET /jobs/1/edit
   def edit
+    authorize @job
   end
 
   # POST /jobs
   # POST /jobs.json
   def create
     @job = Job.new(job_params)
-    @job.user = current_user
 
     respond_to do |format|
       if @job.save
@@ -57,6 +57,7 @@ class JobsController < ApplicationController
   # DELETE /jobs/1
   # DELETE /jobs/1.json
   def destroy
+    authorize @job
     @job.destroy
     respond_to do |format|
       format.html { redirect_to jobs_url, notice: 'Job was successfully deleted.' }
@@ -73,5 +74,13 @@ class JobsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_params
       params.require(:job).permit(:title, :description, :tenant_available_time, :image)
+    end
+
+    # creates the user _job entry when a job is creates
+    def create_user_job
+      @user_job = UserJob.new 
+      @user_job.user_id = current_user.id
+      @user_job.job_id = Job.last.id
+      @user_job.save
     end
 end
