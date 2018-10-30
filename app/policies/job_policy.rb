@@ -8,7 +8,6 @@ class JobPolicy < ApplicationPolicy
 
   def update?
     @user == @job.user
-    user.admin? or not post.published?
   end
 
   def destroy?
