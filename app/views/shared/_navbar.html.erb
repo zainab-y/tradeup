@@ -3,6 +3,8 @@
    <p>
        Welcome, <%= current_user.email %>
        <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
+<%# link below takes you to current users edit profile page %>
+       <%= link_to 'Edit Profile', "/user_profile/#{current_user.user_profile.id}/edit" %>
    </p>
    <% else %>
         <%= link_to "Login", new_user_session_path %>

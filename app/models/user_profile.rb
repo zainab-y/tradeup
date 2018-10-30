@@ -1,3 +1,3 @@
 class UserProfile < ApplicationRecord
-  belongs_to :address
+  belongs_to :user
 end
