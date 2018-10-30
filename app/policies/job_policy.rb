@@ -14,6 +14,5 @@ class JobPolicy < ApplicationPolicy
   def destroy?
     @user == @job.user
   end
-
  
 end
