@@ -18,9 +18,9 @@
         <td><%= job.title %></td>
         <td><%= job.description %></td>
         <td><%= job.tenant_available_time %></td>
-        <td><%= link_to 'Show', job %></td>
-        <td><%= link_to 'Edit', edit_job_path(job) %></td>
-        <td><%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Preview', job %></td>
+        <td><%= link_to 'Edit Job', edit_job_path(job) %></td>
+        <td><%= link_to 'Delete Job', job, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

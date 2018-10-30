@@ -42,6 +42,6 @@ class JobsTest < ApplicationSystemTestCase
       click_on "Destroy", match: :first
     end
 
-    assert_text "Job was successfully destroyed"
+    assert_text "Job was successfully deleted"
   end
 end
