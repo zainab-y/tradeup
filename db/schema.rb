@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_29_232500) do
-
+ActiveRecord::Schema.define(version: 2018_10_30_013254) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,15 +36,6 @@ ActiveRecord::Schema.define(version: 2018_10_29_232500) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "addresses", force: :cascade do |t|
-    t.string "street"
-    t.string "suburb"
-    t.string "state"
-    t.string "postcode"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "job_categories", force: :cascade do |t|
     t.string "category"
     t.datetime "created_at", null: false
@@ -66,8 +56,10 @@ ActiveRecord::Schema.define(version: 2018_10_29_232500) do
     t.datetime "updated_at", null: false
     t.bigint "job_status_id"
     t.bigint "job_category_id"
-    t.bigint "address_id"
-    t.index ["address_id"], name: "index_jobs_on_address_id"
+    t.string "street"
+    t.string "suburb"
+    t.string "postcode"
+    t.integer "price"
     t.index ["job_category_id"], name: "index_jobs_on_job_category_id"
     t.index ["job_status_id"], name: "index_jobs_on_job_status_id"
   end
@@ -87,10 +79,13 @@ ActiveRecord::Schema.define(version: 2018_10_29_232500) do
     t.string "abn"
     t.string "insurance"
     t.string "name"
-    t.bigint "address_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["address_id"], name: "index_user_profiles_on_address_id"
+    t.bigint "user_id"
+    t.string "street"
+    t.string "suburb"
+    t.string "postcode"
+    t.index ["user_id"], name: "index_user_profiles_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -105,10 +100,9 @@ ActiveRecord::Schema.define(version: 2018_10_29_232500) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "jobs", "addresses"
   add_foreign_key "jobs", "job_categories"
   add_foreign_key "jobs", "job_statuses"
   add_foreign_key "user_jobs", "jobs"
   add_foreign_key "user_jobs", "users"
-  add_foreign_key "user_profiles", "addresses"
+  add_foreign_key "user_profiles", "users"
 end
