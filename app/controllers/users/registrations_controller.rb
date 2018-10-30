@@ -3,6 +3,8 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
+ #The method below allows us to run create_profile method after a registration(sign-up) is completed. This will create an empty user profile with the the user_id equals to current_user id.
+ after_action :create_profile, only: [:create]
 
   # GET /resource/sign_up
   # def new
@@ -13,18 +15,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def create
   #   #super
   # end
-
-  #The method below (lines 18 -28) allows us to run create_profile method after a registration(sign-up) is completed. This will create an empty user profile with the the user_id equals to current_user id.
-  after_action :create_profile, only: [:create]
-
-
-  private
-  def create_profile
-      # Account.create(@user)
-    @user_profile = UserProfile.new
-    @user_profile.user_id = current_user.id
-    @user_profile.save
-  end
 
   # GET /resource/edit
   # def edit
@@ -71,4 +61,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  private
+  def create_profile
+    @user_profile = UserProfile.new
+    @user_profile.user_id = current_user.id
+    @user_profile.save
+  end
 end
