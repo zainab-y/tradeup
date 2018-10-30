@@ -17,13 +17,17 @@
     <% @jobs.each do |job| %>
       <tr>
         <td><%= job.title %></td>
-        <td><%= job.users.first.username %></td>
+        <td>
+          <a href="user_profiles/<%=job.users.first.user_profile.id%>">
+            <%= job.users.first.username %>
+          </a>
+        </td>
         <td><%= job.description %></td>
         <td><%= job.tenant_available_time %></td>
         <td><%= link_to 'Preview', job %></td>
         <% if current_user.id == job.users.first.id %>
-        <td><%= link_to 'Edit Job', edit_job_path(job) %></td>
-        <td><%= link_to 'Delete Job', job, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Edit Job', edit_job_path(job) %></td>
+          <td><%= link_to 'Delete Job', job, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
       </tr>
     <% end %>

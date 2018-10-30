@@ -25,5 +25,7 @@
   <%= @user_profile.street %>, <%= @user_profile.suburb %>, <%= @user_profile.postcode %>
 </p>
 
-<%= link_to 'Edit', edit_user_profile_path(@user_profile) %> |
-<%= link_to 'Back', user_profiles_path %>
+<% if current_user.id == @user_profile.user.id %>
+<%= link_to 'Edit', edit_user_profile_path(@user_profile) %> 
+<% end %>
+
