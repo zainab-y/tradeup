@@ -19,6 +19,7 @@ class UserProfilesController < ApplicationController
 
   # GET /user_profiles/1/edit
   def edit
+    authorize @user_profile
   end
 
   # POST /user_profiles
@@ -54,6 +55,7 @@ class UserProfilesController < ApplicationController
   # DELETE /user_profiles/1
   # DELETE /user_profiles/1.json
   def destroy
+    authorize @user_profile
     @user_profile.destroy
     respond_to do |format|
       format.html { redirect_to user_profiles_url, notice: 'User profile was successfully destroyed.' }

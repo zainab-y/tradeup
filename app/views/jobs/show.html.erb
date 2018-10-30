@@ -5,6 +5,14 @@
   <%= @job.title %>
 </p>
 
+<%= image_tag @job.image, width:'300'%>
+<p>
+  <strong>Creator:</strong>
+  <a href="../user_profiles/<%=@job.users.first.user_profile.id%>">
+    <%= @job.users.first.username %>
+  </a>
+</p>
+
 <p>
   <strong>Description:</strong>
   <%= @job.description %>
@@ -15,7 +23,7 @@
   <%= @job.tenant_available_time %>
 </p>
 
-<%= image_tag @job.image, width:'300'%>
-
-<%= link_to 'Edit', edit_job_path(@job) %> |
+<% if current_user.id == @job.users.first.id %>
+  <%= link_to 'Edit', edit_job_path(@job) %> |
+<% end %>
 <%= link_to 'Back', jobs_path %>
