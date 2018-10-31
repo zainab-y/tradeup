@@ -5,14 +5,17 @@
     <p>Title: <%= job.title %></p><br>
     <%= image_tag job.image, width:'300'%>
     <p>Creator: <%= job.users.first.username %></p>
+    
+    <%= link_to 'View Job', job %>
     <hr>
 <% end %>
 
 
 <h2>Jobs I have Accepted: </h2>
 <% @accepted_jobs.each do |job| %>
-   <p>Title: <%= job.title %></p>
+    <p>Title: <%= job.title %></p>
     <%= image_tag job.image, width:'300'%>
     <p>Creator: <%= job.users.first.username %></p>
-    <hr>
+    <%= link_to 'View Job', job %>
+<hr>
 <% end %>
