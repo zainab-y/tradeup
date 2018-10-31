@@ -22,6 +22,22 @@ class UserProfilesController < ApplicationController
     authorize @user_profile
   end
 
+  # GET /user_profiles/1/my_job
+  def my_jobs
+    @jobs = UserProfile.find(params[:id]).user.jobs 
+    @my_jobs = []
+    @accepted_jobs = []
+
+    @jobs.each do |job|
+      if job.users.first == current_user 
+        @my_jobs << job
+      else
+        @accepted_jobs << job
+      end
+    end
+
+  end
+
   # POST /user_profiles
   # POST /user_profiles.json
   def create
