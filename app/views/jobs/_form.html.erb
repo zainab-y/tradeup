@@ -36,19 +36,35 @@
     <%= form.file_field :image %>
   </div>
 
+  <%= form.label :address %>
+  <div id="locationField">
+      <input id="autocomplete" placeholder="Enter your address"
+             type="text"></input>
+  </div>
+
   <div class="field">
-    <%= form.label :street %>
-    <%= form.text_area :street %>
+    <%= form.label :street_number %>
+    <%= form.text_area :street_number, id: 'street_number' %>
   </div>
 
-    <div class="field">
-    <%= form.label :suburb %>
-    <%= form.text_area :suburb %>
+  <div class="field">
+    <%= form.label :street_name %>
+    <%= form.text_area :street_name, id: 'route' %>
   </div>
 
-    <div class="field">
+  <div class="field">
+    <%= form.label :city %>
+    <%= form.text_area :city, id: 'locality' %>
+  </div>
+
+  <div class="field">
     <%= form.label :postcode %>
-    <%= form.text_area :postcode %>
+    <%= form.text_area :postcode, id: 'postal_code' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :state %>
+    <%= form.text_area :state, id: 'administrative_area_level_1' %>
   </div>
 
   <div class="field">
@@ -60,3 +76,61 @@
     <%= form.submit %>
   </div>
 <% end %>
+
+
+<script>
+  // This example displays an address form, using the autocomplete feature
+  // of the Google Places API to help users fill in the information.
+
+  // This example requires the Places library. Include the libraries=places
+  // parameter when you first load the API. For example:
+  // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+  var placeSearch, autocomplete;
+  var componentForm = {
+    street_number: 'short_name',
+    route: 'long_name',
+    locality: 'long_name',
+    administrative_area_level_1: 'short_name',
+    country: 'long_name',
+    postal_code: 'short_name'
+  };
+
+  function initAutocomplete() {
+    // Create the autocomplete object, restricting the search to geographical
+    // location types.
+    autocomplete = new google.maps.places.Autocomplete(
+        /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+        {types: ['geocode']});
+
+    // When the user selects an address from the dropdown, populate the address
+    // fields in the form.
+    autocomplete.addListener('place_changed', fillInAddress);
+  }
+
+  function fillInAddress() {
+    // Get the place details from the autocomplete object.
+    var place = autocomplete.getPlace();
+
+    for (var component in componentForm) {
+      if (document.getElementById(component)) {
+        document.getElementById(component).value = '';
+        document.getElementById(component).disabled = false;
+      }
+    }
+
+    // Get each component of the address from the place details
+    // and fill the corresponding field on the form.
+    for (var i = 0; i < place.address_components.length; i++) {
+      var addressType = place.address_components[i].types[0];
+      if (document.getElementById(addressType) && componentForm[addressType]) {
+        var val = place.address_components[i][componentForm[addressType]];
+        document.getElementById(addressType).value = val;
+      }
+    }
+  }
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&libraries=places&callback=initAutocomplete"
+    async defer>
+</script>
