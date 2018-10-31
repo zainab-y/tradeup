@@ -84,8 +84,9 @@ class JobsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_params
-      params.require(:job).permit(:title, :description, :tenant_available_time, :image, :job_category, :street, :suburb, :postcode)
+      params.require(:job).permit(:title, :description, :tenant_available_time, :job_category_id, :price, :image, :street_number, :street_name, :city, :postcode, :state)
     end
+
 
     # creates the user _job entry when a job is creates
     def create_user_job
