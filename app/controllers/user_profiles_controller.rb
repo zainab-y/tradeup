@@ -10,6 +10,11 @@ class UserProfilesController < ApplicationController
   # GET /user_profiles/1
   # GET /user_profiles/1.json
   def show
+    if @user_profile.image.attachment 
+      @profile_image = @user_profile.image
+    else
+      @profile_image = "https://api.adorable.io/avatars/200/#{current_user.username}" 
+    end
   end
 
   # GET /user_profiles/new
