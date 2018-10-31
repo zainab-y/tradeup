@@ -87,7 +87,6 @@ class JobsController < ApplicationController
       params.require(:job).permit(:title, :description, :tenant_available_time, :job_category_id, :price, :image, :street_number, :street_name, :city, :postcode, :state)
     end
 
-
     # creates the user _job entry when a job is creates
     def create_user_job
       @user_job = UserJob.new 
