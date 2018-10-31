@@ -7,11 +7,11 @@ class JobPolicy < ApplicationPolicy
   end
 
   def edit?
-    @user == @job.user
+    @user == @job.users.first
   end
 
   def destroy?
-    @user == @job.user
+    @user == @job.users.first
   end
  
 end
