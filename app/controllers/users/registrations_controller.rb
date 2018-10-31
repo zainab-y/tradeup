@@ -4,7 +4,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
  #The method below allows us to run create_profile method after a registration(sign-up) is completed. This will create an empty user profile with the the user_id equals to current_user id.
- after_action :create_profile, only: [:create]
+  after_action :create_profile, only: [:create]
 
   # GET /resource/sign_up
   # def new
@@ -64,8 +64,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   private
   def create_profile
-    @user_profile = UserProfile.new
-    @user_profile.user_id = current_user.id
-    @user_profile.save
+    if current_user
+      @user_profile = UserProfile.new
+      @user_profile.user_id = current_user.id
+      @user_profile.save
+    end 
   end
 end
