@@ -2,6 +2,11 @@
 
 <h1>Current Available Jobs</h1>
 
+<%= form_tag jobs_path :method => 'get' do %>
+  <%= text_field_tag :search, params[:search] %>
+  <%= submit_tag "Search" %>
+  <% end %>
+  
 <table>
   <thead>
     <tr>
@@ -14,6 +19,7 @@
   </thead>
 
   <tbody>
+  
     <% @jobs.each do |job| %>
       <tr>
         <td><%= job.title %></td>

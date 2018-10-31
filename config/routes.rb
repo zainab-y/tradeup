@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { registrations: 'users/registrations' }
   resources :jobs
+  resources :searches
   get 'jobs/:id/accept', to: 'jobs#accept', as: 'jobs_accept'
 
   root 'pages#welcome'
