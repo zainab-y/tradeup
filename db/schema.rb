@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_30_032759) do
+ActiveRecord::Schema.define(version: 2018_10_31_042534) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,10 +56,12 @@ ActiveRecord::Schema.define(version: 2018_10_30_032759) do
     t.datetime "updated_at", null: false
     t.bigint "job_status_id"
     t.bigint "job_category_id"
-    t.string "street"
-    t.string "suburb"
+    t.string "street_name"
+    t.string "city"
     t.string "postcode"
     t.integer "price"
+    t.string "street_number"
+    t.string "state"
     t.index ["job_category_id"], name: "index_jobs_on_job_category_id"
     t.index ["job_status_id"], name: "index_jobs_on_job_status_id"
   end
@@ -82,9 +84,11 @@ ActiveRecord::Schema.define(version: 2018_10_30_032759) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
-    t.string "street"
-    t.string "suburb"
+    t.string "street_name"
+    t.string "city"
     t.string "postcode"
+    t.string "street_number"
+    t.string "state"
     t.index ["user_id"], name: "index_user_profiles_on_user_id"
   end
 

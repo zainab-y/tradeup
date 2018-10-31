@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<%= image_tag @user_profile.image, width:'300'%>
+<%= image_tag @profile_image, width: '200' %>
 
 <p>
   <strong>Name:</strong>
@@ -24,7 +24,7 @@
 
 <p>
   <strong>Address:</strong>
-  <%= @user_profile.street %>, <%= @user_profile.suburb %>, <%= @user_profile.postcode %>
+  <%= @user_profile.street_number %> <%= @user_profile.street_name %>, <%= @user_profile.city %>, <%= @user_profile.postcode %>
 </p>
 
 <% if current_user.id == @user_profile.user.id %>

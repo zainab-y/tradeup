@@ -10,6 +10,11 @@ class UserProfilesController < ApplicationController
   # GET /user_profiles/1
   # GET /user_profiles/1.json
   def show
+    if @user_profile.image.attachment 
+      @profile_image = @user_profile.image
+    else
+      @profile_image = "https://api.adorable.io/avatars/200/#{current_user.username}" 
+    end
   end
 
   # GET /user_profiles/new
@@ -87,6 +92,6 @@ class UserProfilesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_profile_params
-      params.fetch(:user_profile).permit(:bio, :contact, :name, :insurance, :abn, :street, :suburb, :postcode, :image)
+      params.fetch(:user_profile).permit(:bio, :contact, :name, :insurance, :abn, :street_number, :street_name, :city, :postcode, :state, :image)
     end
 end
