@@ -4,8 +4,8 @@
        Welcome, <%= current_user.username %>
        <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
 <%# link below takes you to current users edit profile page %>
-       <%= link_to 'Edit Profile', "/user_profiles/#{current_user.user_profile.id}/edit" %>
-        <%= link_to 'My Jobs', "/user_profiles/#{current_user.user_profile.id}/my_jobs"  %>
+       <%= link_to 'Edit Profile', edit_user_profile_path(current_user.user_profile.id) %>
+        <%= link_to 'My Jobs', my_jobs_path(current_user.user_profile.id) %>
    </p>
    <% else %>
         <%= link_to "Login", new_user_session_path %>
