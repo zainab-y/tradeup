@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<h1>Thank you for accepting the job</h1>
 
 <p>
   <strong>Title:</strong>
@@ -28,11 +28,4 @@
   <%= @job.tenant_available_time %>
 </p>
 
-<% if current_user.id == @job.users.first.id %>
-  <%= link_to 'Edit', edit_job_path(@job) %> |
-<% end %>
-
-<% if current_user.id != @job.users.first.id && @job.users.count.to_i < 2%>
-  <%= link_to 'Accept Job', jobs_accept_path %>
-<% end %>
-<%= link_to 'Back', jobs_path %>
+<%= link_to 'My Jobs', "/user_profiles/#{current_user.user_profile.id}/my_jobs"  %>

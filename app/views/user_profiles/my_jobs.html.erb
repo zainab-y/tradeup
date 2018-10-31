@@ -1,0 +1,12 @@
+<h1>My Jobs</h1>
+
+<h2>Jobs I Created: </h2>
+<% @my_jobs.each do |job| %>
+    <%= job.id %>
+<% end %>
+
+
+<h2>Jobs I have Accepted: </h2>
+<% @accepted_jobs.each do |job| %>
+    <%= job.id %>
+<% end %>

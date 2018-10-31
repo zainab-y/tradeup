@@ -1,16 +1,19 @@
-<nav>
-<html lang="en">
-<head>
-  <title>TradeUp | Home </title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
-<body>
-
 <nav class="navbar navbar-default">
+   <% if user_signed_in? %>
+   <p>
+       Welcome, <%= current_user.username %>
+       <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
+<%# link below takes you to current users edit profile page %>
+       <%= link_to 'Edit Profile', "/user_profiles/#{current_user.user_profile.id}/edit" %>
+        <%= link_to 'My Jobs', "/user_profiles/#{current_user.user_profile.id}/my_jobs"  %>
+   </p>
+   <% else %>
+        <%= link_to "Login", new_user_session_path %>
+        <%= link_to "Sign Up", new_user_registration_path %>
+   <% end %>
+
+
+
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" ></a>

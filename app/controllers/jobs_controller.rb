@@ -2,11 +2,17 @@ class JobsController < ApplicationController
   before_action :set_job, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
   after_action :create_user_job, only: [:create]
+  before_action :accept_job, only: [:accept]
 
   # GET /jobs
   # GET /jobs.json
   def index
-    @jobs = Job.all
+    @jobs = []
+    Job.all.each do |job|
+      if job.users.count < 2
+        @jobs << job
+      end
+    end 
   end
 
   # GET /jobs/1
@@ -22,6 +28,11 @@ class JobsController < ApplicationController
   # GET /jobs/1/edit
   def edit
     authorize @job
+  end
+
+  # GET /jobs/1/accept
+  def accept
+    @job = Job.find(params[:id])
   end
 
   # POST /jobs
@@ -73,7 +84,7 @@ class JobsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_params
-      params.require(:job).permit(:title, :description, :tenant_available_time, :image)
+      params.require(:job).permit(:title, :description, :tenant_available_time, :image, :job_category, :street, :suburb, :postcode)
     end
 
     # creates the user _job entry when a job is creates
@@ -81,6 +92,13 @@ class JobsController < ApplicationController
       @user_job = UserJob.new 
       @user_job.user_id = current_user.id
       @user_job.job_id = Job.last.id
+      @user_job.save
+    end
+
+    def accept_job
+      @user_job = UserJob.new 
+      @user_job.user_id = current_user.id
+      @user_job.job_id = params[:id].to_i
       @user_job.save
     end
 end

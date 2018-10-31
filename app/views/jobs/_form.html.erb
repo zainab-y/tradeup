@@ -12,6 +12,11 @@
   <% end %>
 
   <div class="field">
+    <%= form.label :job_category %><br>
+    <%= form.collection_select :job_category_id, JobCategory.all, :id, :category %>
+  </div>
+
+  <div class="field">
     <%= form.label :title %>
     <%= form.text_field :title %>
   </div>
@@ -29,6 +34,26 @@
   <div class="field">
     <%= form.label :image %>
     <%= form.file_field :image %>
+  </div>
+
+  <div class="field">
+    <%= form.label :street %>
+    <%= form.text_area :street %>
+  </div>
+
+    <div class="field">
+    <%= form.label :suburb %>
+    <%= form.text_area :suburb %>
+  </div>
+
+    <div class="field">
+    <%= form.label :postcode %>
+    <%= form.text_area :postcode %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.number_field :price %>
   </div>
 
   <div class="actions">
