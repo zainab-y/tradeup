@@ -2,11 +2,17 @@
 
 <h2>Jobs I Created: </h2>
 <% @my_jobs.each do |job| %>
-    <%= job.id %>
+    <p>Title: <%= job.title %></p><br>
+    <%= image_tag job.image, width:'300'%>
+    <p>Creator: <%= job.users.first.username %></p>
+    <hr>
 <% end %>
 
 
 <h2>Jobs I have Accepted: </h2>
 <% @accepted_jobs.each do |job| %>
-    <%= job.id %>
+   <p>Title: <%= job.title %></p>
+    <%= image_tag job.image, width:'300'%>
+    <p>Creator: <%= job.users.first.username %></p>
+    <hr>
 <% end %>
