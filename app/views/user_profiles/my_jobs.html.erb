@@ -3,8 +3,11 @@
 <h2>Jobs I Created: </h2>
 <% @my_jobs.each do |job| %>
     <p>Title: <%= job.title %></p><br>
-    <%= image_tag job.image, width:'300'%>
+    <% if job.image.attachment %>
+        <%= image_tag job.image, width:'300'%>
+    <% end %>
     <p>Creator: <%= job.users.first.username %></p>
+    <p>Status: <%= job.job_status.status.capitalize %></p>
     
     <%= link_to 'View Job', job %>
     <hr>
@@ -14,8 +17,40 @@
 <h2>Jobs I have Accepted: </h2>
 <% @accepted_jobs.each do |job| %>
     <p>Title: <%= job.title %></p>
-    <%= image_tag job.image, width:'300'%>
+    <% if job.image.attachment %>
+        <%= image_tag job.image, width:'300'%>
+    <% end %>
     <p>Creator: <%= job.users.first.username %></p>
+    <p>Status: <%= job.job_status.status.capitalize %></p>
+
     <%= link_to 'View Job', job %>
+    <%= link_to 'Job completed', jobs_completed_path(job.id) %>
+<hr>
+<% end %>
+
+<h2>Jobs I Completed: </h2>
+<% @jobs_user_completed.each do |job| %>
+    <p>Title: <%= job.title %></p>
+    <% if job.image.attachment %>
+        <%= image_tag job.image, width:'300'%>
+    <% end %>
+    <p>Creator: <%= job.users.first.username %></p>
+    <p>Status: <%= job.job_status.status.capitalize %></p>
+
+    <%= link_to 'View Job', job %>
+<hr>
+<% end %>
+
+<h2>Jobs Completed by other user: </h2>
+<% @jobs_completed_by_other_user.each do |job| %>
+    <p>Title: <%= job.title %></p>
+    <% if job.image.attachment %>
+        <%= image_tag job.image, width:'300'%>
+    <% end %>
+    <p>Creator: <%= job.users.first.username %></p>
+    <p>Status: <%= job.job_status.status.capitalize %></p>
+
+    <%= link_to 'View Job', job %>
+    <%= link_to 'Pay' %>
 <hr>
 <% end %>
