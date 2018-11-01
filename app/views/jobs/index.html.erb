@@ -2,7 +2,7 @@
 
 <h2>Search by category for job</h2>
 <%= form_tag jobs_path, method: :get do %>
-  <%= text_field(:query, params[:query], placeholder: "Filter by categories") %>
+  <%= text_field_tag :query, params[:query], placeholder: "Filter by categories" %>
   <%= submit_tag "Search" %>
 <% end %>
 
