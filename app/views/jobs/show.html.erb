@@ -1,9 +1,11 @@
 <p id="notice"><%= notice %></p>
 
+
 <h2><%= @message %> </h2>
 
+
 <p>
-  <strong>Title:</strong>
+  <strong>Job Title:</strong>
   <%= @job.title %>
 </p>
 
@@ -24,12 +26,12 @@
 </p>
 
 <p>
-  <strong>Description:</strong>
+  <strong>Job Description:</strong>
   <%= @job.description %>
 </p>
 
 <p>
-  <strong>Tenant available time:</strong>
+  <strong>Time:</strong>
   <%= @job.tenant_available_time %>
 </p>
 
@@ -41,4 +43,4 @@
   <%= link_to 'Accept Job', jobs_accept_path %>
 <% end %>
 
-
+<%= link_to 'View All Jobs', jobs_path %>
