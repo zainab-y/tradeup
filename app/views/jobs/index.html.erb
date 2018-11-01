@@ -15,6 +15,7 @@
       <th>Creator</th>
       <th>Description</th>
       <th>Tenant's available time</th>
+      <th>Job Status</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -30,6 +31,7 @@
         </td>
         <td><%= job.description %></td>
         <td><%= job.tenant_available_time %></td>
+        <td><%= job.job_status.status.capitalize %></td>
         <td><%= link_to 'Preview', job %></td>
         <% if current_user.id == job.users.first.id %>
           <td><%= link_to 'Edit Job', edit_job_path(job) %></td>

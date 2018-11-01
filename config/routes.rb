@@ -9,7 +9,10 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'users/registrations' }
   resources :jobs
   get 'jobs/:id/accept', to: 'jobs#accept', as: 'jobs_accept'
+  get 'jobs/:id/completed', to: 'jobs#completed', as: 'jobs_completed'
 
   root 'pages#welcome'
+
+  resources :charges
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
