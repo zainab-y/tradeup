@@ -1,0 +1,15 @@
+a {
+    font-size: 20px;
+    text-decoration: none;
+    &:hover {
+        border-bottom: 1px solid black;
+    }
+}
+
+p {
+    font-size: 20px;
+}
+
+h1 a {
+    font-size: 40px;
+}

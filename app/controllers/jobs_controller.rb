@@ -7,11 +7,19 @@ class JobsController < ApplicationController
   # GET /jobs
   # GET /jobs.json
   def index
+    # jobs that haven't been accepted, so jobs with only one user will be displayed, jobs with two users won't display
     @jobs = []
     Job.all.each do |job|
       if job.users.count < 2
         @jobs << job
       end
+    end
+    if params[:query].present?
+      job_category_search = JobCategory.where(category: params[:query])
+      job_category_search = job_category_search.first
+      @jobs = job_category_search.jobs
+    else 
+      @jobs
     end 
   end
 
