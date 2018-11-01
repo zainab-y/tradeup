@@ -12,5 +12,7 @@ Rails.application.routes.draw do
   get 'jobs/:id/completed', to: 'jobs#completed', as: 'jobs_completed'
 
   root 'pages#welcome'
+
+  resources :charges
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
