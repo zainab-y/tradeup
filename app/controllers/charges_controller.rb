@@ -16,9 +16,7 @@ class ChargesController < ApplicationController
             :description => @job.title,
             :currency    => 'aud'
         )
-        
-        current_user.jobs << @job
-        
+ 
         redirect_to @job
         
         rescue Stripe::CardError => e
