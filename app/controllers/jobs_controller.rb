@@ -2,7 +2,7 @@ class JobsController < ApplicationController
   before_action :set_job, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
   after_action :create_user_job, only: [:create]
-  before_action :accept_job, only: [:accept]
+  before_action :is_trader?, only: [:accept]
 
   # GET /jobs
   # GET /jobs.json
@@ -20,6 +20,7 @@ class JobsController < ApplicationController
   def show
     @is_current_users_job = current_user.id == @job.users.first.id 
     job_status = @job.job_status_id
+    # Statuses: 1 -> created, 2 -> accepted, 3 -> completed, 4 -> paid
     # if the status is completed and not the creator of the job
     if job_status == 1 && @is_current_users_job
         @message = "Waiting for someone to accept your job!"
@@ -46,6 +47,12 @@ class JobsController < ApplicationController
 
   # GET /jobs/1/accept
   def accept
+    # assigns user to job in the join table
+    @user_job = UserJob.new 
+    @user_job.user_id = current_user.id
+    @user_job.job_id = params[:id].to_i
+    @user_job.save
+
     @job = Job.find(params[:id])
     # The below updates job status id to accepted
     @job.job_status_id = 2
@@ -110,7 +117,7 @@ class JobsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_params
-      params.require(:job).permit(:title, :description, :tenant_available_time, :job_category_id, :price, :image, :street_number, :street_name, :city, :postcode, :state, :job_status_id)
+      params.require(:job).permit(:title, :description, :tenant_available_time, :job_category_id, :price, :street_number, :street_name, :city, :postcode, :state, :job_status_id, images: [])
     end
 
 
@@ -122,11 +129,11 @@ class JobsController < ApplicationController
       @user_job.save
     end
 
-    def accept_job
-      @user_job = UserJob.new 
-      @user_job.user_id = current_user.id
-      @user_job.job_id = params[:id].to_i
-      @user_job.save
+    def is_trader?
+      user = current_user.user_profile
+      if user.abn.nil? && user.insurance.nil?
+        redirect_to trades_form_path(user.id)
+      end
     end
 
 end

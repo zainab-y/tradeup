@@ -12,8 +12,10 @@
   <%= @job.price %>
 </p>
 
-<% if @job.image.attachment %>
-    <%= image_tag @job.image, width:'300'%>
+<% if !@job.images.empty?  %>
+  <% (0...@job.images.count).each do |image| %>
+    <%= image_tag @job.images[image], width:'300'%>
+  <% end %>
 <% end %>
 
 <p>
@@ -35,10 +37,14 @@
 
 <% if @is_current_users_job %>
   <%= link_to 'Edit', edit_job_path(@job) %> 
+  <%= link_to 'Delete Job', @job, method: :delete, data: { confirm: 'Are you sure?' } %>
 <% end %>
 
-<% if current_user.id != @job.users.first.id && @job.users.count.to_i < 2%>
+<% if !@is_current_users_job && @job.users.count.to_i < 2%>
   <%= link_to 'Accept Job', jobs_accept_path %>
+  <%= link_to 'Job completed', jobs_completed_path(@job.id) %>
 <% end %>
+
+
 
 

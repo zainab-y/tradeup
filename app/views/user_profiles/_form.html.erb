@@ -11,12 +11,6 @@
     </div>
   <% end %>
 
-  <%# need to link up active storage first %>
-  <%# <div class="field"> %>
-    <%# <%= form.label :image %> 
-    <%# <%= form.file_field :image %> 
-  <%# </div> %>
-
   <div class="field">
     <%= form.label :image %>
     <%= form.file_field :image %>
@@ -67,10 +61,9 @@
     <%= form.text_area :state, id: 'administrative_area_level_1' %>
   </div>
 
-<%# the next two lines is for trades people only and will only need filling if the user wishes to accept a job. so if these field == nil at the time of accepting a job they will need to fill these in.%>
 
 <%# if statement will only let them edit this field if it is not nil %>
-  <% if current_user.user_profile.abn != nil && current_user.user_profile.insurance != nil %>
+  <% if !current_user.user_profile.abn.nil? && !current_user.user_profile.insurance.nil? %>
     <p>You have Tradie status</p>
     <div class="field">
         <%= form.label :abn %>

@@ -46,7 +46,10 @@ class UserProfilesController < ApplicationController
         @jobs_completed_by_other_user << job
       end
     end
+  end
 
+  def trades_form
+    @user_profile = UserProfile
   end
 
   # POST /user_profiles

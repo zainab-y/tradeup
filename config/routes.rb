@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   #user profile routes
   resources :user_profiles
   get 'user_profiles/:id/my_jobs', to: 'user_profiles#my_jobs', as: 'my_jobs'
+  get 'user_profiles/:id/trades_form', to: 'user_profiles#trades_form', as: 'trades_form'
 
   get 'show/edit'
   get 'show/new'
