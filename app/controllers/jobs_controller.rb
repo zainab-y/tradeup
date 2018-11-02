@@ -7,11 +7,19 @@ class JobsController < ApplicationController
   # GET /jobs
   # GET /jobs.json
   def index
+    # jobs that haven't been accepted, so jobs with only one user will be displayed, jobs with two users won't display
     @jobs = []
     Job.all.each do |job|
       if job.users.count < 2
         @jobs << job
       end
+    end
+    if params[:query].present?
+      job_category_search = JobCategory.where(category: params[:query])
+      job_category_search = job_category_search.first
+      @jobs = job_category_search.jobs
+    else 
+      @jobs
     end 
   end
 
@@ -120,7 +128,6 @@ class JobsController < ApplicationController
     def job_params
       params.require(:job).permit(:title, :description, :tenant_available_time, :job_category_id, :price, :street_number, :street_name, :city, :postcode, :state, :job_status_id, images: [])
     end
-
 
     # creates the user _job entry when a job is creates
     def create_user_job
