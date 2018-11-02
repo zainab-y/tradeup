@@ -44,7 +44,7 @@
 
   <div class="field">
     <%= form.label :street_number %>
-    <%= form.text_area :street_number, id: 'street_number' %>
+    <%= form.text_area :street_number, id: 'street_number', maxlength: 10 %>
   </div>
 
   <div class="field">
@@ -59,7 +59,7 @@
 
   <div class="field">
     <%= form.label :postcode %>
-    <%= form.text_area :postcode, id: 'postal_code', :required => true %>
+    <%= form.text_area :postcode, id: 'postal_code', :required => true, maxlength: 4 %>
   </div>
 
   <div class="field">
