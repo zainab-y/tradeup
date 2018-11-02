@@ -14,10 +14,12 @@ class JobsController < ApplicationController
         @jobs << job
       end
     end
+    
     if params[:query].present?
-      job_category_search = JobCategory.where(category: params[:query])
+      job_category_search = JobCategory.where("category LIKE ?", '%crescent%').all
       job_category_search = job_category_search.first
       @jobs = job_category_search.jobs
+      
     else 
       @jobs
     end 
@@ -109,4 +111,4 @@ class JobsController < ApplicationController
       @user_job.job_id = params[:id].to_i
       @user_job.save
     end
-end
+  end
