@@ -11,6 +11,19 @@
     </div>
   <% end %>
 
+  <%# If they want to accept a job and dont have tradie status this will show %>
+<% if params[:abn_insurance] %>
+  <h2>We require the below details before you can accept this job: </h2>
+  <div class="field">
+      <%= form.label :abn %>
+      <%= form.text_field :abn %>
+  </div>
+
+  <div class="field">
+      <%= form.label :insurance %>
+      <%= form.text_field :insurance %>
+  </div>
+<% else %>
   <div class="field">
     <%= form.label :image %>
     <%= form.file_field :image %>
@@ -62,18 +75,19 @@
   </div>
 
 
-<%# if statement will only let them edit this field if it is not nil %>
-  <% if !current_user.user_profile.abn.nil? && !current_user.user_profile.insurance.nil? %>
-    <p>You have Tradie status</p>
-    <div class="field">
-        <%= form.label :abn %>
-        <%= form.text_field :abn %>
-    </div>
+  <%# if statement will only let them edit this field if it is not nil %>
+    <% if !current_user.user_profile.abn.nil? && !current_user.user_profile.insurance.nil? %>
+      <p>You have Tradie status</p>
+      <div class="field">
+          <%= form.label :abn %>
+          <%= form.text_field :abn %>
+      </div>
 
-    <div class="field">
-        <%= form.label :insurance %>
-        <%= form.text_field :insurance %>
-    </div>
+      <div class="field">
+          <%= form.label :insurance %>
+          <%= form.text_field :insurance %>
+      </div>
+    <% end  %>
   <% end  %>
 
   <div class="actions">

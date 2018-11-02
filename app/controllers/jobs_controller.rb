@@ -33,6 +33,7 @@ class JobsController < ApplicationController
     elsif job_status == 3 && @is_current_users_job
       @message = "The Job you have posted has been completed. Please make payment using the button below:"
     end
+
   end
 
   # GET /jobs/new
@@ -132,7 +133,7 @@ class JobsController < ApplicationController
     def is_trader?
       user = current_user.user_profile
       if user.abn.nil? && user.insurance.nil?
-        redirect_to trades_form_path(user.id)
+        redirect_to edit_user_profile_path(user.id, :abn_insurance => 0)
       end
     end
 

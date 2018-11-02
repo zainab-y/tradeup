@@ -49,7 +49,6 @@ class UserProfilesController < ApplicationController
   end
 
   def trades_form
-    @user_profile = UserProfile
   end
 
   # POST /user_profiles

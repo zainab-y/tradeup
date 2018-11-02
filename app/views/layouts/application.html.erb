@@ -16,6 +16,7 @@
 
   <body>
     <%= render "shared/navbar" %>
+    <%= link_to "Become a Tradie", edit_user_profile_path(current_user.user_profile.id, :abn_insurance => 0) %>
     <%= yield %>
   </body>
 </html>
