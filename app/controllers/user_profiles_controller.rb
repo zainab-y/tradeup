@@ -29,9 +29,6 @@ class UserProfilesController < ApplicationController
 
   # GET /user_profiles/1/my_job
   def my_jobs
-    @is_job_creator = current_user == @job.users.first
-    @is_job_acceptor = current_user == @job.users.find(2) 
-    @job_status = @job.job_status_id
     @jobs = current_user.jobs 
     @my_jobs = []
     @accepted_jobs = []

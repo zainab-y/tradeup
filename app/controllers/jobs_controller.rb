@@ -15,11 +15,11 @@ class JobsController < ApplicationController
       end
     end
 
-    if params[:job][:category_id]
+    if params[:job] && params[:job][:category_id]
       search = JobCategory.find(params[:job][:category_id])
       job_category_search = JobCategory.where(category: search.category)
+      job_category_search = job_category_search.first
       @jobs = job_category_search.jobs
-      
     else 
       @jobs
     end 
