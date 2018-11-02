@@ -2,60 +2,70 @@
 
 
 <h2><%= @message %> </h2>
+<br>
+<br>
 
 
-<p>
-  <strong>Job Title:</strong>
-  <%= @job.title %>
-</p>
+<div>
+  <h3>Details of the job</h3>
+  <p>
+    <strong>Job Title:</strong>
+    <%= @job.title %>
+  </p>
 
-<p>
-  <strong>Price:</strong>
-  <%= @job.price %>
-</p>
+  <p>
+    <strong>Price:</strong>
+    <%= @job.price %>
+  </p>
 
-<% if !@job.images.empty?  %>
-  <% (0...@job.images.count).each do |image| %>
-    <%= image_tag @job.images[image], width:'300'%>
+  <% if !@job.images.empty?  %>
+    <% (0...@job.images.count).each do |image| %>
+      <%= image_tag @job.images[image], width:'300'%>
+    <% end %>
   <% end %>
-<% end %>
 
-<p>
-  <strong>Creator:</strong>
-  <a href="../user_profiles/<%=@job.users.first.user_profile.id%>">
-    <%= @job.users.first.username %>
-  </a>
-</p>
+  <p>
+    <strong>Creator:</strong>
+    <a href="../user_profiles/<%=@job.users.first.user_profile.id%>">
+      <%= @job.users.first.username %>
+    </a>
+  </p>
 
-<p>
-  <strong>Job Description:</strong>
-  <%= @job.description %>
-</p>
+  <p>
+    <strong>Job Description:</strong>
+    <%= @job.description %>
+  </p>
 
-<p>
-  <strong>Time:</strong>
-  <%= @job.tenant_available_time %>
-</p>
+  <p>
+    <strong>Time:</strong>
+    <%= @job.tenant_available_time %>
+  </p>
+</div>
+<br>
+<br>
 
-<%= form_tag charges_path do %>
-<%= hidden_field_tag(:job_id, @job.id) %>
-  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-          data-description="A month's subscription"
-          data-amount="<%= @job.price %>"
-          data-currency="aud"
-          data-locale="auto"></script>
-<% end %>
-
-
-<% if @is_current_users_job %>
+<% if @is_job_creator %>
   <%= link_to 'Edit', edit_job_path(@job) %> 
   <%= link_to 'Delete Job', @job, method: :delete, data: { confirm: 'Are you sure?' } %>
 <% end %>
 
-<% if !@is_current_users_job && @job.users.count.to_i < 2%>
-  <%= link_to 'Accept Job', jobs_accept_path %>
-  <%= link_to 'Job completed', jobs_completed_path(@job.id) %>
+<% if @job_status == 1 && !@is_current_users_job && @job.users.count.to_i < 2 %>
+  <%= link_to 'Accept Job', jobs_accept_path(@job.id) %>
+<% end %>
+<% if @job_status == 2 && @is_job_acceptor %>
+  <%= link_to 'Complete Job', jobs_complete_path(@job.id) %>
+<% end %>
+
+<% if @job_status == 3 && @is_job_creator %>
+  <%= form_tag charges_path do %>
+  <%= hidden_field_tag(:job_id, @job.id) %>
+    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+            data-description="A month's subscription"
+            data-amount="<%= @job.price %>"
+            data-currency="aud"
+            data-locale="auto"></script>
+  <% end %>
 <% end %>
 
 

@@ -10,7 +10,8 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'users/registrations' }
   resources :jobs
   get 'jobs/:id/accept', to: 'jobs#accept', as: 'jobs_accept'
-  get 'jobs/:id/completed', to: 'jobs#completed', as: 'jobs_completed'
+  get 'jobs/:id/complete', to: 'jobs#complete', as: 'jobs_complete'
+  get 'jobs/:id/pay', to: 'jobs#pay', as: 'jobs_pay'
 
   root 'pages#welcome'
 
