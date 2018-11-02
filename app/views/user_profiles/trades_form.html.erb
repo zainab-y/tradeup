@@ -14,15 +14,15 @@
 
     <div class="field">
         <%= form.label :abn %>
-        <%= form.text_field :abn %>
+        <%= form.text_field :abn, :required => true %>
     </div>
 
     <div class="field">
         <%= form.label :insurance %>
-        <%= form.text_field :insurance %>
+        <%= form.text_field :insurance, :required => true %>
     </div>
 
     <div class="actions">
-        <%= form.submit
-    </div> %>
+        <%= form.submit %>
+    </div>
 <% end %>

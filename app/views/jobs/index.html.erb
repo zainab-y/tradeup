@@ -3,10 +3,8 @@
 <h2>Search by category for job</h2>
 <%= form_tag jobs_path, method: :get do %>
   <%= text_field_tag :query, params[:query], placeholder: "Filter by categories" %>
-  <%= submit_tag "Search" %>
+  <%= submit_tag "Search", name: nil %>
 <% end %>
-
-<h1>Current Available Jobs</h1>
 
 <table>
   <thead>

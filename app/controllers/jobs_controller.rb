@@ -14,10 +14,12 @@ class JobsController < ApplicationController
         @jobs << job
       end
     end
+    
     if params[:query].present?
-      job_category_search = JobCategory.where(category: params[:query])
+      job_category_search = JobCategory.where("category LIKE ?", '%crescent%').all
       job_category_search = job_category_search.first
       @jobs = job_category_search.jobs
+      
     else 
       @jobs
     end 
@@ -159,5 +161,5 @@ class JobsController < ApplicationController
         redirect_to edit_user_profile_path(user.id, :abn_insurance => 0)
       end
     end
-
 end
+
