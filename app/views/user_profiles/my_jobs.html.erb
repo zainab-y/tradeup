@@ -29,7 +29,7 @@
         <p>Status: <%= job.job_status.status.capitalize %></p>
 
         <%= link_to 'View Job', job %>
-        <%= link_to 'Job completed', jobs_completed_path(job.id) %>
+        <%= link_to 'Job completed', jobs_complete_path(job.id) %>
     <hr>
     <% end %>
 <% end %>

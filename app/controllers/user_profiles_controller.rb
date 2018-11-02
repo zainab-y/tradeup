@@ -29,6 +29,9 @@ class UserProfilesController < ApplicationController
 
   # GET /user_profiles/1/my_job
   def my_jobs
+    @is_job_creator = current_user == @job.users.first
+    @is_job_acceptor = current_user == @job.users.find(2) 
+    @job_status = @job.job_status_id
     @jobs = current_user.jobs 
     @my_jobs = []
     @accepted_jobs = []
@@ -94,6 +97,14 @@ class UserProfilesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_job
+      @job = Job.find(params[:id])
+    end
+
+    def job_params
+      params.require(:job).permit(:title, :description, :tenant_available_time, :job_category_id, :price, :street_number, :street_name, :city, :postcode, :state, :job_status_id, images: [])
+    end
+
     def set_user_profile
       @user_profile = UserProfile.find(params[:id])
     end

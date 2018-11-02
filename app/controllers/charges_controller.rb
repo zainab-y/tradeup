@@ -17,7 +17,7 @@ class ChargesController < ApplicationController
             :currency    => 'aud'
         )
  
-        redirect_to @job
+        redirect_to jobs_pay_path(params[:job_id].to_i)
         
         rescue Stripe::CardError => e
             flash[:error] = e.message

@@ -26,20 +26,25 @@ class JobsController < ApplicationController
   # GET /jobs/1
   # GET /jobs/1.json
   def show
-    @is_current_users_job = current_user.id == @job.users.first.id 
-    job_status = @job.job_status_id
+    @is_job_creator = current_user == @job.users.first
+    @is_job_acceptor = current_user == @job.users.find(2) 
+    @job_status = @job.job_status_id
     # Statuses: 1 -> created, 2 -> accepted, 3 -> completed, 4 -> paid
     # if the status is completed and not the creator of the job
-    if job_status == 1 && @is_current_users_job
-        @message = "Waiting for someone to accept your job!"
-    elsif job_status == 2 && @is_current_users_job
-      @message = "Your job has been accepted, waiting completion"
-    elsif job_status == 2 && !@is_current_users_job
+    if @job_status == 1 && @is_job_creator
+        @message = "Congratulations your job is created! We will send you an email when someone takes the job!"
+    elsif @job_status == 1
+      @message = "This job is available. Click ACCEPT JOB if you would like to take the job"
+    elsif @job_status == 2 && @is_job_creator
+      @message = "Your job has been taken, waiting completion"
+    elsif @job_status == 2 && @is_job_acceptor
       @message = "You have accepted this job, click complete when done"
-    elsif job_status == 3 && !@is_current_users_job
+    elsif @job_status == 3 && @is_job_acceptor
       @message = "You have completed the job and now pending payment"
-    elsif job_status == 3 && @is_current_users_job
+    elsif @job_status == 3 && @is_job_creator
       @message = "The Job you have posted has been completed. Please make payment using the button below:"
+    elsif @job_status == 4
+      @message = "The payment was successful! This order is now closed. Thank you!!!"
     end
 
   end
@@ -56,22 +61,33 @@ class JobsController < ApplicationController
 
   # GET /jobs/1/accept
   def accept
-    # assigns user to job in the join table
+    # assigns user(tradesman) to job in the join table
     @user_job = UserJob.new 
     @user_job.user_id = current_user.id
     @user_job.job_id = params[:id].to_i
     @user_job.save
 
     @job = Job.find(params[:id])
-    # The below updates job status id to accepted
+    # sets the job status to 'accepted'
     @job.job_status_id = 2
     @job.save
+    redirect_to @job
   end
 
   # GET /jobs/1/completed
-  def completed
+  def complete
     @job = Job.find(params[:id])
+    # sets the job status to 'completed'
     @job.job_status_id = 3
+    @job.save
+    redirect_to @job
+  end
+
+  # GET /jobs/1/paid
+  def pay
+    @job = Job.find(params[:id])
+    # sets the job status to 'paid'
+    @job.job_status_id = 4
     @job.save
     redirect_to @job
   end
@@ -80,7 +96,7 @@ class JobsController < ApplicationController
   # POST /jobs.json
   def create
     @job = Job.new(job_params)
-    # the below sets the status to 'created'
+    # sets the job status to 'created'
     @job.job_status_id = 1
     respond_to do |format|
       if @job.save
