@@ -11,10 +11,16 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :job_category %><br>
-    <%= form.collection_select :job_category_id, JobCategory.all, :id, :category, :required => true %>
-  </div>
+    <div class="field">
+      <%= form.label :job_category %><br>
+      <% if params[:job] %>
+        <%= form.collection_select :job_category_id, JobCategory.all, :id, :category, :required => true, :include_blank => true, :selected => params[:job][:category_id] %>
+      <% elsif params[:job_category] %>
+        <%= form.collection_select :job_category_id, JobCategory.all, :id, :category, :required => true, :include_blank => true, :selected => params[:job_category] %>
+      <% else %>
+        <%= form.collection_select :job_category_id, JobCategory.all, :id, :category, :required => true, :include_blank => true %>
+      <% end %>
+    </div>
 
   <div class="field">
     <%= form.label :title %>
@@ -59,7 +65,7 @@
 
   <div class="field">
     <%= form.label :postcode %>
-    <%= form.text_area :postcode, id: 'postal_code', :required => true, maxlength: 4 %>
+    <%= form.text_area :postcode, id: 'postal_code', :required => true, maxlength: 4, value: params[:postcode] %>
   </div>
 
   <div class="field">

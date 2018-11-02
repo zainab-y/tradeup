@@ -23,6 +23,11 @@
     </div>
   <% end -%>
 
+  <% if params[:job_category] %>
+    <%= f.text_field :job_category, value: params[:job_category] %>
+    <%= f.text_field :postcode, value: params[:postcode] %>
+  <% end %>
+
   <div class="actions">
     <%= f.submit "Log in" %>
   </div>
