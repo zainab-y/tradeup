@@ -14,6 +14,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   # def create
   #   #super
+
   # end
 
   # GET /resource/edit
@@ -63,11 +64,22 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   private
+  
   def create_profile
     if current_user
       @user_profile = UserProfile.new
       @user_profile.user_id = current_user.id
       @user_profile.save
     end 
+  end
+
+  protected
+
+  def after_sign_up_path_for(resource)
+    if params[:user][:job_category]
+      new_job_path(:job_category => params[:user][:job_category], :postcode => params[:user][:postcode])
+    else
+      root_path
+    end
   end
 end

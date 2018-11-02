@@ -2,9 +2,8 @@
 
 <h2>Search by category for job</h2>
 <%= form_tag jobs_path, method: :get do %>
-<%= collection_select(:job, :category_id, JobCategory.all, :id, :category) %>  
+<%= collection_select(:job, :category_id, JobCategory.all, :id, :category, :prompt => true) %>  
 <%= submit_tag "Search" %>
-
 <% end %>
 
 <table>

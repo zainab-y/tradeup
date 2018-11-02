@@ -1,8 +1,9 @@
 class JobsController < ApplicationController
   before_action :set_job, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show, :new]
   after_action :create_user_job, only: [:create]
   before_action :is_trader?, only: [:accept]
+  before_action :registered_user?, only: [:new]
 
   # GET /jobs
   # GET /jobs.json
@@ -162,6 +163,13 @@ class JobsController < ApplicationController
       job_id = params[:job_id]
       if user.abn.nil? && user.insurance.nil?
         redirect_to edit_user_profile_path(user.id, :abn_insurance => 0, :job_id => job_id)
+      end
+    end
+
+    def registered_user?
+      if current_user
+      else
+        redirect_to new_user_registration_path(:postcode => params[:postcode], :job_category => params[:job][:category_id])
       end
     end
 end

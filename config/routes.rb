@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'show/new'
 
   devise_for :users, controllers: { registrations: 'users/registrations' }
+  
   resources :jobs
   get 'jobs/:id/accept', to: 'jobs#accept', as: 'jobs_accept'
   get 'jobs/:id/complete', to: 'jobs#complete', as: 'jobs_complete'
