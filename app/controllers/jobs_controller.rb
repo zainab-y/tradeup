@@ -14,10 +14,10 @@ class JobsController < ApplicationController
         @jobs << job
       end
     end
-    
-    if params[:query].present?
-      job_category_search = JobCategory.where("category LIKE ?", '%crescent%').all
-      job_category_search = job_category_search.first
+
+    if params[:job][:category_id]
+      search = JobCategory.find(params[:job][:category_id])
+      job_category_search = JobCategory.where(category: search.category)
       @jobs = job_category_search.jobs
       
     else 
@@ -29,7 +29,9 @@ class JobsController < ApplicationController
   # GET /jobs/1.json
   def show
     @is_job_creator = current_user == @job.users.first
-    @is_job_acceptor = current_user == @job.users.find(2) 
+    if @job.users.count > 1
+      @is_job_acceptor = current_user == @job.users.find(2) 
+    end
     @job_status = @job.job_status_id
     # Statuses: 1 -> created, 2 -> accepted, 3 -> completed, 4 -> paid
     # if the status is completed and not the creator of the job
