@@ -33,7 +33,7 @@
         <td><%= job.tenant_available_time %></td>
         <td><%= job.job_status.status.capitalize %></td>
         <td><%= link_to 'Preview', job %></td>
-        <% if current_user.id == job.users.first.id %>
+        <% if !current_user.nil? && current_user.id == job.users.first.id %>
           <td><%= link_to 'Edit Job', edit_job_path(job) %></td>
           <td><%= link_to 'Delete Job', job, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
