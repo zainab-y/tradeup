@@ -1,7 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<h3>Your job is posted successfully! Here is your job details:</h3>
-<br>
+
+<h2><%= @message %> </h2>
+
 
 <p>
   <strong>Job Title:</strong>
@@ -13,8 +14,10 @@
   <%= @job.price %>
 </p>
 
-<% if @job.image.attachment %>
-    <%= image_tag @job.image, width:'300'%>
+<% if !@job.images.empty?  %>
+  <% (0...@job.images.count).each do |image| %>
+    <%= image_tag @job.images[image], width:'300'%>
+  <% end %>
 <% end %>
 
 <p>
@@ -34,14 +37,29 @@
   <%= @job.tenant_available_time %>
 </p>
 
-<% if current_user.id == @job.users.first.id %>
-  <%= link_to 'Edit', edit_job_path(@job) %> |
+<%= form_tag charges_path do %>
+<%= hidden_field_tag(:job_id, @job.id) %>
+  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+          data-description="A month's subscription"
+          data-amount="<%= @job.price %>"
+          data-currency="aud"
+          data-locale="auto"></script>
 <% end %>
 
-<% if current_user.id != @job.users.first.id && @job.users.count.to_i < 2%>
+
+<% if @is_current_users_job %>
+  <%= link_to 'Edit', edit_job_path(@job) %> 
+  <%= link_to 'Delete Job', @job, method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>
+
+<% if !@is_current_users_job && @job.users.count.to_i < 2%>
   <%= link_to 'Accept Job', jobs_accept_path %>
+  <%= link_to 'Job completed', jobs_completed_path(@job.id) %>
 <% end %>
-<%= link_to 'Back', jobs_path %>
 
-<h3>We will send you an email when someone takes the job.</h3>
-<br>
+
+<%= link_to 'Back', :back %>
+
+<%= link_to 'View All Jobs', jobs_path %>
+

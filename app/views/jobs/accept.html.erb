@@ -10,7 +10,12 @@
   <%= @job.price %>
 </p>
 
-<%= image_tag @job.image, width:'300'%>
+<% if !@job.images.empty?  %>
+  <% (0...@job.images.count).each do |image| %>
+    <%= image_tag @job.images[image], width:'300'%>
+  <% end %>
+<% end %>
+
 <p>
   <strong>Creator:</strong>
   <a href="../user_profiles/<%=@job.users.first.user_profile.id%>">

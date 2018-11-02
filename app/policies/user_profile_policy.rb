@@ -10,6 +10,10 @@ class UserProfilePolicy < ApplicationPolicy
     @user == @user_profile.user
   end
 
+  def trades_form?
+    @user == @user_profile.user
+  end
+
   def destroy?
     @user == @user_profile.user
   end

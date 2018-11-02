@@ -2,7 +2,7 @@ class JobsController < ApplicationController
   before_action :set_job, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
   after_action :create_user_job, only: [:create]
-  before_action :accept_job, only: [:accept]
+  before_action :is_trader?, only: [:accept]
 
   # GET /jobs
   # GET /jobs.json
@@ -28,6 +28,22 @@ class JobsController < ApplicationController
   # GET /jobs/1
   # GET /jobs/1.json
   def show
+    @is_current_users_job = current_user.id == @job.users.first.id 
+    job_status = @job.job_status_id
+    # Statuses: 1 -> created, 2 -> accepted, 3 -> completed, 4 -> paid
+    # if the status is completed and not the creator of the job
+    if job_status == 1 && @is_current_users_job
+        @message = "Waiting for someone to accept your job!"
+    elsif job_status == 2 && @is_current_users_job
+      @message = "Your job has been accepted, waiting completion"
+    elsif job_status == 2 && !@is_current_users_job
+      @message = "You have accepted this job, click complete when done"
+    elsif job_status == 3 && !@is_current_users_job
+      @message = "You have completed the job and now pending payment"
+    elsif job_status == 3 && @is_current_users_job
+      @message = "The Job you have posted has been completed. Please make payment using the button below:"
+    end
+
   end
 
   # GET /jobs/new
@@ -42,14 +58,32 @@ class JobsController < ApplicationController
 
   # GET /jobs/1/accept
   def accept
+    # assigns user to job in the join table
+    @user_job = UserJob.new 
+    @user_job.user_id = current_user.id
+    @user_job.job_id = params[:id].to_i
+    @user_job.save
+
     @job = Job.find(params[:id])
+    # The below updates job status id to accepted
+    @job.job_status_id = 2
+    @job.save
+  end
+
+  # GET /jobs/1/completed
+  def completed
+    @job = Job.find(params[:id])
+    @job.job_status_id = 3
+    @job.save
+    redirect_to @job
   end
 
   # POST /jobs
   # POST /jobs.json
   def create
     @job = Job.new(job_params)
-
+    # the below sets the status to 'created'
+    @job.job_status_id = 1
     respond_to do |format|
       if @job.save
         format.html { redirect_to @job, notice: 'Job was successfully created.' }
@@ -94,7 +128,7 @@ class JobsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_params
-      params.require(:job).permit(:title, :description, :tenant_available_time, :job_category_id, :price, :image, :street_number, :street_name, :city, :postcode, :state)
+      params.require(:job).permit(:title, :description, :tenant_available_time, :job_category_id, :price, :street_number, :street_name, :city, :postcode, :state, :job_status_id, images: [])
     end
 
     # creates the user _job entry when a job is creates
@@ -105,10 +139,11 @@ class JobsController < ApplicationController
       @user_job.save
     end
 
-    def accept_job
-      @user_job = UserJob.new 
-      @user_job.user_id = current_user.id
-      @user_job.job_id = params[:id].to_i
-      @user_job.save
+    def is_trader?
+      user = current_user.user_profile
+      if user.abn.nil? && user.insurance.nil?
+        redirect_to edit_user_profile_path(user.id, :abn_insurance => 0)
+      end
     end
-  end
+end
+

@@ -29,18 +29,26 @@ class UserProfilesController < ApplicationController
 
   # GET /user_profiles/1/my_job
   def my_jobs
-    @jobs = UserProfile.find(params[:id]).user.jobs 
+    @jobs = current_user.jobs 
     @my_jobs = []
     @accepted_jobs = []
+    @jobs_user_completed = []
+    @jobs_completed_by_other_user = []
 
     @jobs.each do |job|
-      if job.users.first == current_user 
+      if job.users.first == current_user && job.job_status.id == 1
         @my_jobs << job
-      else
+      elsif job.users.first != current_user && job.job_status.id == 2
         @accepted_jobs << job
+      elsif job.users.first != current_user && job.job_status.id == 3
+        @jobs_user_completed << job
+      elsif job.users.first == current_user && job.job_status.id == 3
+        @jobs_completed_by_other_user << job
       end
     end
+  end
 
+  def trades_form
   end
 
   # POST /user_profiles

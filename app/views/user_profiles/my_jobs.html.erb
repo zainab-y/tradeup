@@ -1,21 +1,70 @@
 <h1>My Jobs</h1>
 
-<h2>Jobs I Created: </h2>
-<% @my_jobs.each do |job| %>
-    <p>Title: <%= job.title %></p><br>
-    <%= image_tag job.image, width:'300'%>
-    <p>Creator: <%= job.users.first.username %></p>
-    
-    <%= link_to 'View Job', job %>
-    <hr>
+<% if @my_jobs.count > 0 %>
+    <h2>Jobs I Created: </h2>
+    <% @my_jobs.each do |job| %>
+        <p>Title: <%= job.title %></p><br>
+        <% if !job.images.empty? %>
+            <% (0...job.images.count).each do |image| %>
+                <%= image_tag job.images[image], width:'300'%>
+            <% end %>
+        <% end %>
+        <p>Creator: <%= job.users.first.username %></p>
+        <p>Status: <%= job.job_status.status.capitalize %></p>
+        <%= link_to 'View Job', job %>
+        <hr>
+    <% end %>
 <% end %>
 
+<% if @accepted_jobs.count > 0 %>
+    <h2>Jobs I have Accepted: </h2>
+    <% @accepted_jobs.each do |job| %>
+        <p>Title: <%= job.title %></p>
+        <% if !job.images.empty? %>
+            <% (0...job.images.count).each do |image| %>
+                <%= image_tag job.images[image], width:'300'%>
+            <% end %>
+        <% end %>
+        <p>Creator: <%= job.users.first.username %></p>
+        <p>Status: <%= job.job_status.status.capitalize %></p>
 
-<h2>Jobs I have Accepted: </h2>
-<% @accepted_jobs.each do |job| %>
-    <p>Title: <%= job.title %></p>
-    <%= image_tag job.image, width:'300'%>
-    <p>Creator: <%= job.users.first.username %></p>
-    <%= link_to 'View Job', job %>
-<hr>
+        <%= link_to 'View Job', job %>
+        <%= link_to 'Job completed', jobs_completed_path(job.id) %>
+    <hr>
+    <% end %>
+<% end %>
+
+<% if @jobs_user_completed.count > 0 %>
+    <h2>Jobs I Completed: </h2>
+    <% @jobs_user_completed.each do |job| %>
+        <p>Title: <%= job.title %></p>
+        <% if !job.images.empty? %>
+            <% (0...job.images.count).each do |image| %>
+                <%= image_tag job.images[image], width:'300'%>
+            <% end %>
+        <% end %>
+        <p>Creator: <%= job.users.first.username %></p>
+        <p>Status: <%= job.job_status.status.capitalize %></p>
+
+        <%= link_to 'View Job', job %>
+    <hr>
+    <% end %>
+<% end %>
+
+<% if @jobs_completed_by_other_user.count > 0 %>
+    <h2>Jobs Completed by other user: </h2>
+    <% @jobs_completed_by_other_user.each do |job| %>
+        <p>Title: <%= job.title %></p>
+        <% if !job.images.empty? %>
+            <% (0...job.images.count).each do |image| %>
+                <%= image_tag job.images[image], width:'300'%>
+            <% end %>
+        <% end %>
+        <p>Creator: <%= job.users.first.username %></p>
+        <p>Status: <%= job.job_status.status.capitalize %></p>
+
+        <%= link_to 'View Job', job %>
+        <%= link_to 'Pay' %>
+    <hr>
+    <% end %>
 <% end %>
