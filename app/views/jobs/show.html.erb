@@ -49,8 +49,8 @@
   <%= link_to 'Delete Job', @job, method: :delete, data: { confirm: 'Are you sure?' } %>
 <% end %>
 
-<% if @job_status == 1 && !@is_current_users_job && @job.users.count.to_i < 2 %>
-  <%= link_to 'Accept Job', jobs_accept_path(@job.id) %>
+<% if @job_status == 1 && !@is_job_creator && @job.users.count < 2 %>
+  <%= link_to 'Accept Job', jobs_accept_path(@job.id, :job_id => @job.id) %>
 <% end %>
 <% if @job_status == 2 && @is_job_acceptor %>
   <%= link_to 'Complete Job', jobs_complete_path(@job.id) %>
@@ -67,9 +67,6 @@
             data-locale="auto"></script>
   <% end %>
 <% end %>
-
-
-<%= link_to 'Back', :back %>
 
 <%= link_to 'View All Jobs', jobs_path %>
 

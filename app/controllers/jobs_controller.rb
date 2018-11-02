@@ -30,7 +30,7 @@ class JobsController < ApplicationController
   def show
     @is_job_creator = current_user == @job.users.first
     if @job.users.count > 1
-      @is_job_acceptor = current_user == @job.users.find(2) 
+      @is_job_acceptor = current_user == @job.users.second
     end
     @job_status = @job.job_status_id
     # Statuses: 1 -> created, 2 -> accepted, 3 -> completed, 4 -> paid
@@ -159,8 +159,9 @@ class JobsController < ApplicationController
 
     def is_trader?
       user = current_user.user_profile
+      job_id = params[:job_id]
       if user.abn.nil? && user.insurance.nil?
-        redirect_to edit_user_profile_path(user.id, :abn_insurance => 0)
+        redirect_to edit_user_profile_path(user.id, :abn_insurance => 0, :job_id => job_id)
       end
     end
 end

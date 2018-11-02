@@ -23,7 +23,12 @@
       <%= form.label :insurance %>
       <%= form.text_field :insurance %>
   </div>
+
+  <%= form.hidden_field :abn_insurance, value: 0 %>
+  <%= form.hidden_field :job_id, value: params[:job_id]%>
+
 <% else %>
+
   <div class="field">
     <%= form.label :image %>
     <%= form.file_field :image %>

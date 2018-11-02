@@ -71,7 +71,11 @@ class UserProfilesController < ApplicationController
   # PATCH/PUT /user_profiles/1.json
   def update
     respond_to do |format|
-      if @user_profile.update(user_profile_params)
+      if @user_profile.update(user_profile_params) && params[:user_profile][:job_id]
+        previous_job_id = params[:user_profile][:job_id]
+        format.html { redirect_to jobs_accept_path(previous_job_id) }
+        format.json { render :show, status: :ok, location: @user_profile }
+      elsif @user_profile.update(user_profile_params)
         format.html { redirect_to @user_profile, notice: 'User profile was successfully updated.' }
         format.json { render :show, status: :ok, location: @user_profile }
       else
@@ -94,13 +98,6 @@ class UserProfilesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_job
-      @job = Job.find(params[:id])
-    end
-
-    def job_params
-      params.require(:job).permit(:title, :description, :tenant_available_time, :job_category_id, :price, :street_number, :street_name, :city, :postcode, :state, :job_status_id, images: [])
-    end
 
     def set_user_profile
       @user_profile = UserProfile.find(params[:id])
