@@ -2,8 +2,8 @@
 
 <h2>Search by category for job</h2>
 <%= form_tag jobs_path, method: :get do %>
-  <%= text_field_tag :query, params[:query], placeholder: "Filter by categories" %>
-  <%= submit_tag "Search" %>
+<%= collection_select(:job, :category_id, JobCategory.all, :id, :category) %>  
+<%= submit_tag "Search" %>
 <% end %>
 
 <h1>Current Available Jobs</h1>
