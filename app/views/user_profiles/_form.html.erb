@@ -16,7 +16,7 @@
   <h2>We require the below details before you can accept this job: </h2>
   <div class="field">
       <%= form.label :abn %>
-      <%= form.text_field :abn %>
+      <%= form.text_field :abn, :required => true, maxlength: 11 %>
   </div>
 
   <div class="field">
@@ -51,7 +51,7 @@
 
     <div class="field">
     <%= form.label :street_number %>
-    <%= form.text_area :street_number, id: 'street_number' %>
+    <%= form.text_area :street_number, id: 'street_number', :required => true, maxlength: 10 %>
   </div>
 
   <div class="field">
@@ -66,12 +66,12 @@
 
   <div class="field">
     <%= form.label :postcode %>
-    <%= form.text_area :postcode, id: 'postal_code' %>
+    <%= form.text_area :postcode, id: 'postal_code', :required => true, maxlength: 4 %>
   </div>
 
   <div class="field">
     <%= form.label :state %>
-    <%= form.text_area :state, id: 'administrative_area_level_1' %>
+    <%= form.text_area :state, id: 'administrative_area_level_1', :required => true, maxlength: 4 %>
   </div>
 
 
