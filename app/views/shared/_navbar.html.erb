@@ -1,5 +1,6 @@
-<nav>
-    <h1><%= link_to(image_tag(asset_path('tradeup_logo.png'), width: '100'), root_path) %></h1>
+<nav>   
+     <%= link_to(image_tag(asset_path('tradeup_logo.png'), width: '100'), root_path) %><br><br><br>
+
     <% if user_signed_in? %>
         <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
         <%= link_to('Edit Profile', edit_user_profile_path(current_user.user_profile.id)) %>
