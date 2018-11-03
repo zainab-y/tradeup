@@ -24,8 +24,7 @@
   <% end -%>
 
   <% if params[:job_category] %>
-    <%= f.text_field :job_category, value: params[:job_category] %>
-    <%= f.text_field :postcode, value: params[:postcode] %>
+    <%= f.hidden_field :job_category, value: params[:job_category] %>
   <% end %>
 
   <div class="actions">

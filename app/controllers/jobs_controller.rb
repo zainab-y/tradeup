@@ -27,7 +27,7 @@ class JobsController < ApplicationController
   end
 
   # GET /jobs/1
-  # GET /jobs/1.json
+  # GET /jobs/1.json 
   def show
     @is_job_creator = current_user == @job.users.first
     if @job.users.count > 1
@@ -105,7 +105,7 @@ class JobsController < ApplicationController
     @job.job_status_id = 1
     respond_to do |format|
       if @job.save
-        format.html { redirect_to @job, notice: 'Job was successfully created.' }
+        format.html { redirect_to @job }
         format.json { render :show, status: :created, location: @job }
       else
         format.html { render :new }
@@ -147,7 +147,7 @@ class JobsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_params
-      result = params.require(:job).permit(:title, :description, :tenant_available_time, :job_category_id, :price, :street_number, :street_name, :city, :postcode, :state, :job_status_id, images: [])
+      result = params.require(:job).permit(:title, :description, :tenant_available_time, :job_category_id, :price, :street_number, :street_name, :city, :postcode, :state, :job_status_id, :tenant_one_name, :tenant_two_name, :tenant_one_contact, :tenant_two_contact, images: [])
       result[:price] = result[:price].to_f * 100
       result
     end
@@ -162,16 +162,15 @@ class JobsController < ApplicationController
 
     def is_trader?
       user = current_user.user_profile
-      job_id = params[:job_id]
       if user.abn.nil? && user.insurance.nil?
-        redirect_to edit_user_profile_path(user.id, :abn_insurance => 0, :job_id => job_id)
+        redirect_to edit_user_profile_path(user.id, :abn_insurance => 0, :job_id => params[:job_id])
       end
     end
 
     def registered_user?
       if current_user
       else
-        redirect_to new_user_registration_path(:postcode => params[:postcode], :job_category => params[:job][:category_id])
+        redirect_to new_user_registration_path(:job_category => params[:job][:category_id])
       end
     end
 end

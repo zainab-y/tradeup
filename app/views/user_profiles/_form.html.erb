@@ -15,12 +15,12 @@
 <% if params[:abn_insurance] %>
   <h2>We require the below details before you can accept this job: </h2>
   <div class="field">
-      <%= form.label :abn %>
-      <%= form.text_field :abn, :required => true, maxlength: 11 %>
+      <%= form.label :abn, "Your ABN: " %>
+      <%= form.text_field :abn, maxlength: 11 %>
   </div>
 
   <div class="field">
-      <%= form.label :insurance %>
+      <%= form.label :insurance, "Business Insuarnce Number: "%>
       <%= form.text_field :insurance %>
   </div>
 
@@ -30,61 +30,67 @@
 <% else %>
 
   <div class="field">
-    <%= form.label :image %>
+    <%= form.label :image, "Profile picture: " %>
     <%= form.file_field :image %>
   </div>
 
   <div class="field">
-    <%= form.label :name %>
+    <%= form.label :name, "Your Name:" %>
     <%= form.text_field :name %>
   </div>
 
   <div class="field">
-    <%= form.label :bio %>
+    <%= form.label :business_name, "Business Name:" %>
+    <%= form.text_field :business_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :bio, "Let People Know About You: "%>
     <%= form.text_area :bio %>
   </div>
 
   <div class="field">
-    <%= form.label :contact %>
+    <%= form.label :contact, "Contact Number: " %>
     <%= form.text_field :contact %>
   </div>
 
-  <%= form.label :address %>
+  <%= form.label :address, "Business address: " %>
   <div id="locationField">
-    <input id="autocomplete" placeholder="Enter your address" onFocus="geolocate()" type="text"></input>
+    <input id="autocomplete" placeholder="Enter your address" type="text" style="width:500px;"></input>
+    <%# <input id="autocomplete" placeholder="Enter your address" onFocus="geolocate()" type="text" style="width:500px;"></input> %>
   </div>
 
     <div class="field">
-    <%= form.label :street_number %>
-    <%= form.text_area :street_number, id: 'street_number', :required => true, maxlength: 10 %>
+    <%# <%= form.label :street_number %> 
+    <%= form.hidden_field :street_number, id: 'street_number', maxlength: 10 %>
   </div>
 
   <div class="field">
-    <%= form.label :street_name %>
-    <%= form.text_area :street_name, id: 'route' %>
+    <%# <%= form.label :street_name %> 
+    <%= form.hidden_field :street_name, id: 'route' %>
   </div>
 
   <div class="field">
-    <%= form.label :city %>
-    <%= form.text_area :city, id: 'locality' %>
+    <%# <%= form.label :city %> 
+    <%= form.hidden_field :city, id: 'locality' %>
   </div>
 
   <div class="field">
-    <%= form.label :postcode %>
-    <%= form.text_area :postcode, id: 'postal_code', :required => true, maxlength: 4 %>
+    <%# <%= form.label :postcode %> 
+    <%= form.hidden_field :postcode, id: 'postal_code', maxlength: 4 %>
   </div>
 
   <div class="field">
-    <%= form.label :state %>
-    <%= form.text_area :state, id: 'administrative_area_level_1', :required => true, maxlength: 4 %>
+    <%# <%= form.label :state %> 
+    <%= form.hidden_field :state, id: 'administrative_area_level_1', maxlength: 4 %>
   </div>
 
 
   <%# if statement will only let them edit this field if it is not nil %>
     <% if !current_user.user_profile.abn.nil? && !current_user.user_profile.insurance.nil? %>
-      <p>You have Tradie status</p>
+      <p>Requirements for trades people:</p>
       <div class="field">
-          <%= form.label :abn %>
+          <%= form.label :abn %> 
           <%= form.text_field :abn %>
       </div>
 
@@ -102,57 +108,58 @@
 
 
 <script>
-      // This example displays an address form, using the autocomplete feature
-      // of the Google Places API to help users fill in the information.
+  // This example displays an address form, using the autocomplete feature
+  // of the Google Places API to help users fill in the information.
 
-      // This example requires the Places library. Include the libraries=places
-      // parameter when you first load the API. For example:
-      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+  // This example requires the Places library. Include the libraries=places
+  // parameter when you first load the API. For example:
+  // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
-      var placeSearch, autocomplete;
-      var componentForm = {
-        street_number: 'short_name',
-        route: 'long_name',
-        locality: 'long_name',
-        administrative_area_level_1: 'short_name',
-        country: 'long_name',
-        postal_code: 'short_name'
-      };
+  var placeSearch, autocomplete;
+  var componentForm = {
+    street_number: 'short_name',
+    route: 'long_name',
+    locality: 'long_name',
+    administrative_area_level_1: 'short_name',
+    country: 'long_name',
+    postal_code: 'short_name'
+  };
 
-      function initAutocomplete() {
-        // Create the autocomplete object, restricting the search to geographical
-        // location types.
-        autocomplete = new google.maps.places.Autocomplete(
-            /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
-            {types: ['geocode'], componentRestrictions: {country: 'aus'});
+  function initAutocomplete() {
+    // Create the autocomplete object, restricting the search to geographical
+    // location types.
+    autocomplete = new google.maps.places.Autocomplete(
+        /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+        {types: ['geocode'], componentRestrictions: {country: 'aus'}});
 
-        // When the user selects an address from the dropdown, populate the address
-        // fields in the form.
-        autocomplete.addListener('place_changed', fillInAddress);
+    // When the user selects an address from the dropdown, populate the address
+    // fields in the form.
+    autocomplete.addListener('place_changed', fillInAddress);
+  }
+
+  function fillInAddress() {
+    // Get the place details from the autocomplete object.
+    var place = autocomplete.getPlace();
+
+    for (var component in componentForm) {
+      if (document.getElementById(component)) {
+        document.getElementById(component).value = '';
+        document.getElementById(component).disabled = false;
       }
+    }
 
-      function fillInAddress() {
-        // Get the place details from the autocomplete object.
-        var place = autocomplete.getPlace();
-
-        for (var component in componentForm) {
-          if (document.getElementById(component)) {
-            document.getElementById(component).value = '';
-            document.getElementById(component).disabled = false;
-          }
-        }
-
-        // Get each component of the address from the place details
-        // and fill the corresponding field on the form.
-        for (var i = 0; i < place.address_components.length; i++) {
-          var addressType = place.address_components[i].types[0];
-          if (document.getElementById(addressType) && componentForm[addressType]) {
-            var val = place.address_components[i][componentForm[addressType]];
-            document.getElementById(addressType).value = val;
-          }
-        }
+    // Get each component of the address from the place details
+    // and fill the corresponding field on the form.
+    for (var i = 0; i < place.address_components.length; i++) {
+      var addressType = place.address_components[i].types[0];
+      if (document.getElementById(addressType) && componentForm[addressType]) {
+        var val = place.address_components[i][componentForm[addressType]];
+        document.getElementById(addressType).value = val;
       }
+    }
+  }
 
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&libraries=places&callback=initAutocomplete"
-        async defer></script>
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&libraries=places&callback=initAutocomplete"
+    async defer>
+</script>
