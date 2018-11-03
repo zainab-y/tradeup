@@ -70,4 +70,6 @@
 <% end %>
 
 <%= link_to 'View All Jobs', jobs_path %>
+<%= link_to 'My Jobs', my_jobs_path(current_user.user_profile.id) %>
+
 

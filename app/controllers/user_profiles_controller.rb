@@ -30,20 +30,34 @@ class UserProfilesController < ApplicationController
   # GET /user_profiles/1/my_job
   def my_jobs
     @jobs = current_user.jobs 
+
     @my_jobs = []
     @accepted_jobs = []
-    @jobs_user_completed = []
-    @jobs_completed_by_other_user = []
 
+    @is_job_creator_completed = []
+    @is_job_acceptor_completed = []
+
+    @is_job_creator_paid = []
+    @is_job_acceptor_paid = []
+
+    # Statuses: 1 -> created, 2 -> accepted, 3 -> completed, 4 -> paid
     @jobs.each do |job|
-      if job.users.first == current_user && job.job_status.id == 1
+      @is_job_creator = job.users.first == current_user 
+      @is_job_acceptor = job.users.first != current_user 
+      @job_status = job.job_status.id
+
+      if @is_job_creator && @job_status == 1
         @my_jobs << job
-      elsif job.users.first != current_user && job.job_status.id == 2
+      elsif @is_job_acceptor && @job_status == 2
         @accepted_jobs << job
-      elsif job.users.first != current_user && job.job_status.id == 3
-        @jobs_user_completed << job
+      elsif @is_job_acceptor && @job_status == 3
+        @is_job_acceptor_completed << job
       elsif job.users.first == current_user && job.job_status.id == 3
-        @jobs_completed_by_other_user << job
+        @is_job_creator_completed << job
+      elsif @is_job_creator && @job_status == 4
+        @is_job_creator_paid << job
+      elsif @is_job_acceptor && @job_status == 4
+        @is_job_acceptor_paid
       end
     end
   end
@@ -54,7 +68,7 @@ class UserProfilesController < ApplicationController
   # POST /user_profiles
   # POST /user_profiles.json
   def create
-    @user_profile = UserProfile.new(user_profile_params)
+    @user_profile = UserProfile.new(user_profile_params) 
 
     respond_to do |format| 
       if @user_profile.save
