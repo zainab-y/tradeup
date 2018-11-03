@@ -12,7 +12,7 @@
   <% end %>
 
     <div class="field">
-      <%= form.label :job_category %><br>
+      <%= form.label :job_category, "Job category: *" %><br>
       <% if params[:job] %>
         <%= form.collection_select :job_category_id, JobCategory.all, :id, :category, :required => true, :include_blank => true, :selected => params[:job][:category_id] %>
       <% elsif params[:job_category] %>
@@ -23,58 +23,77 @@
     </div>
 
   <div class="field">
-    <%= form.label :title %>
+    <%= form.label :title, "Title: *" %>
     <%= form.text_field :title, :required => true %>
   </div>
 
   <div class="field">
-    <%= form.label :description %>
+    <%= form.label :description, "Description: *" %>
     <%= form.text_area :description, :required => true %>
   </div>
 
   <div class="field">
-    <%= form.label :tenant_available_time %>
+    <%= form.label :first_tenant_name, "First tenant name: *" %>
+    <%= form.text_area :tenant_one_name, :required => true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :first_tenant_contact_number, "First tenant contact number: *" %>
+    <%= form.text_area :tenant_one_contact, :required => true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :second_tenant_name %>
+    <%= form.text_area :tenant_two_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :second_tenant_contact_number %>
+    <%= form.text_area :tenant_two_contact %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tenant_available_time, "Tenant's available time: *"%>
     <%= form.datetime_select :tenant_available_time, :required => true %>
   </div>
 
   <div class="field">
-    <%= form.label :images %>
+    <%= form.label :images, "Images (this will assist the tradesman to assess the job prior to attendance): " %>
     <%= form.file_field :images, multiple: true %>
   </div>
 
-  <%= form.label :address, :required => true %>
+  <%= form.label :address, "Address of the property: *"%>
   <div id="locationField">
-      <input id="autocomplete" placeholder="Enter your address"
-             type="text"></input>
+      <input id="autocomplete" placeholder="Enter your address" type="text" style="width:500px;"></input>
   </div>
 
   <div class="field">
-    <%= form.label :street_number %>
-    <%= form.text_area :street_number, id: 'street_number', maxlength: 10 %>
+    <%# <%= form.label :street_number %> 
+    <%= form.hidden_field :street_number, id: 'street_number', maxlength: 10 %>
   </div>
 
   <div class="field">
-    <%= form.label :street_name %>
-    <%= form.text_area :street_name, id: 'route', :required => true %>
+    <%# <%= form.label :street_name %> 
+    <%= form.hidden_field :street_name, id: 'route', :required => true %>
   </div>
 
   <div class="field">
-    <%= form.label :city %>
-    <%= form.text_area :city, id: 'locality', :required => true %>
+    <%# <%= form.label :city %>
+    <%= form.hidden_field :city, id: 'locality', :required => true %>
   </div>
 
   <div class="field">
-    <%= form.label :postcode %>
-    <%= form.text_area :postcode, id: 'postal_code', :required => true, maxlength: 4, value: params[:postcode] %>
+    <%# <%= form.label :postcode %> 
+    <%= form.hidden_field :postcode, id: 'postal_code', :required => true, maxlength: 4, value: params[:postcode] %>
   </div>
 
   <div class="field">
-    <%= form.label :state %>
-    <%= form.text_area :state, id: 'administrative_area_level_1', :required => true %>
+    <%# <%= form.label :state %> 
+    <%= form.hidden_field :state, id: 'administrative_area_level_1', :required => true %>
   </div>
 
   <div class="field">
-    <%= form.label :price %>
+    <%= form.label :price, "Price: *" %>
     <%= form.number_field :price, :required => true %>
   </div>
 
