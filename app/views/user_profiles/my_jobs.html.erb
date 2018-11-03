@@ -34,9 +34,9 @@
     <% end %>
 <% end %>
 
-<% if @jobs_user_completed.count > 0 %>
+<% if @is_job_acceptor_completed.count > 0 %>
     <h2>Jobs I Completed: </h2>
-    <% @jobs_user_completed.each do |job| %>
+    <% @is_job_acceptor_completed.each do |job| %>
         <p>Title: <%= job.title %></p>
         <% if !job.images.empty? %>
             <% (0...job.images.count).each do |image| %>
@@ -51,9 +51,45 @@
     <% end %>
 <% end %>
 
-<% if @jobs_completed_by_other_user.count > 0 %>
+<% if @is_job_creator_completed.count > 0 %>
     <h2>Jobs Completed by other user: </h2>
-    <% @jobs_completed_by_other_user.each do |job| %>
+    <% @is_job_creator_completed.each do |job| %>
+        <p>Title: <%= job.title %></p>
+        <% if !job.images.empty? %>
+            <% (0...job.images.count).each do |image| %>
+                <%= image_tag job.images[image], width:'300'%>
+            <% end %>
+        <% end %>
+        <p>Creator: <%= job.users.first.username %></p>
+        <p>Status: <%= job.job_status.status.capitalize %></p>
+
+        <%= link_to 'View Job', job %>
+        <%= link_to 'Pay' %>
+    <hr>
+    <% end %>
+<% end %>
+
+<% if @is_job_creator_paid.count > 0 %>
+    <h2>Jobs I have paid: </h2>
+    <% @is_job_creator_paid.each do |job| %>
+        <p>Title: <%= job.title %></p>
+        <% if !job.images.empty? %>
+            <% (0...job.images.count).each do |image| %>
+                <%= image_tag job.images[image], width:'300'%>
+            <% end %>
+        <% end %>
+        <p>Creator: <%= job.users.first.username %></p>
+        <p>Status: <%= job.job_status.status.capitalize %></p>
+
+        <%= link_to 'View Job', job %>
+        <%= link_to 'Pay' %>
+    <hr>
+    <% end %>
+<% end %>
+
+<% if @is_job_acceptor_paid.count > 0 %>
+    <h2>Jobs I have been paid for: </h2>
+    <% @is_job_acceptor_paid.each do |job| %>
         <p>Title: <%= job.title %></p>
         <% if !job.images.empty? %>
             <% (0...job.images.count).each do |image| %>
