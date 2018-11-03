@@ -13,11 +13,6 @@
     <%= @job.title %>
   </p>
 
-  <p>
-    <strong>Price:</strong>
-    <%= @job.price %>
-  </p>
-
   <% if !@job.images.empty?  %>
     <% (0...@job.images.count).each do |image| %>
       <%= image_tag @job.images[image], width:'300'%>
@@ -40,6 +35,12 @@
     <strong>Time:</strong>
     <%= @job.tenant_available_time %>
   </p>
+
+  <p>
+    <strong>Price:</strong>
+    <%= number_to_currency(@job.price/100.0) %>
+  </p>
+  
 </div>
 <br>
 <br>
