@@ -27,7 +27,7 @@ class JobsController < ApplicationController
   end
 
   # GET /jobs/1
-  # GET /jobs/1.json
+  # GET /jobs/1.json 
   def show
     @is_job_creator = current_user == @job.users.first
     if @job.users.count > 1
@@ -160,16 +160,15 @@ class JobsController < ApplicationController
 
     def is_trader?
       user = current_user.user_profile
-      job_id = params[:job_id]
       if user.abn.nil? && user.insurance.nil?
-        redirect_to edit_user_profile_path(user.id, :abn_insurance => 0, :job_id => job_id)
+        redirect_to edit_user_profile_path(user.id, :abn_insurance => 0, :job_id => params[:job_id])
       end
     end
 
     def registered_user?
       if current_user
       else
-        redirect_to new_user_registration_path(:postcode => params[:postcode], :job_category => params[:job][:category_id])
+        redirect_to new_user_registration_path(:job_category => params[:job][:category_id])
       end
     end
 end

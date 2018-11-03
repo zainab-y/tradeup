@@ -2,12 +2,10 @@
 
 <h3>Need Somthing fixing?</h3>
 
-<%= label_tag :category %>
-<%= form_tag new_job_path, method: :get do %>
+<%= form_tag new_job_path, method: :get do |form| %>
     <%= collection_select(:job, :category_id, JobCategory.all, :id, :category, :required => true, :include_blank => true) %>  
     <br>
-    <%= label_tag :postcode %>
-    <%= text_field_tag :postcode %>
 
     <%= submit_tag "Create Job" %>
-<% end %>
+<% end %> 
+
