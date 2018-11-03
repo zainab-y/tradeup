@@ -94,7 +94,7 @@
 
   <div class="field">
     <%= form.label :price, "Price: *" %>
-    <%= form.number_field :price, :required => true %>
+    <%= form.text_field :price, :required => true, value: number_with_precision((job.price||0)/100.0, :precision => 2) %>
   </div>
 
   <div class="actions">
