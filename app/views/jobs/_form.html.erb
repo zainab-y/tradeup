@@ -33,6 +33,13 @@
   </div>
 
   <div class="field">
+    <%= form.label :images, "Images (this will assist the tradesman to assess the job prior to attendance): " %>
+    <%# <%= form.file_field :images, multiple: true %>
+    <div class="drag_and_drop"><%= form.drag_and_drop_file_field :images, multiple: true %>
+    <%= image_tag asset_path("drag_and_drop.png"), width: '50'%></div>
+  </div>
+
+  <div class="field">
     <%= form.label :first_tenant_name, "First tenant name: *" %>
     <%= form.text_area :tenant_one_name, :required => true %>
   </div>
@@ -55,11 +62,6 @@
   <div class="field">
     <%= form.label :tenant_available_time, "Tenant's available time: *"%>
     <%= form.datetime_select :tenant_available_time, :required => true %>
-  </div>
-
-  <div class="field">
-    <%= form.label :images, "Images (this will assist the tradesman to assess the job prior to attendance): " %>
-    <%= form.file_field :images, multiple: true %>
   </div>
 
   <%= form.label :address, "Address of the property: *"%> 

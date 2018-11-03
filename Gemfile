@@ -76,3 +76,4 @@ gem "pundit", "~> 2.0"
 
 gem 'stripe', '~> 3.29'
 
+gem 'active_storage_drag_and_drop'
