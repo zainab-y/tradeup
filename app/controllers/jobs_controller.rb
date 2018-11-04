@@ -23,7 +23,7 @@ class JobsController < ApplicationController
       @jobs = job_category_search.jobs
     else 
       @jobs
-    end 
+    end
   end
 
   # GET /jobs/1
@@ -77,6 +77,7 @@ class JobsController < ApplicationController
     @job.job_status_id = 2
     @job.save
     redirect_to @job
+    JobMailer.with(user: @job.users.first).job_taken_email.deliver_now
   end
 
   # GET /jobs/1/completed
@@ -86,6 +87,7 @@ class JobsController < ApplicationController
     @job.job_status_id = 3
     @job.save
     redirect_to @job
+    JobMailer.with(user: @job.users.first).payment_reminder_email.deliver_now
   end
 
   # GET /jobs/1/paid
@@ -95,6 +97,7 @@ class JobsController < ApplicationController
     @job.job_status_id = 4
     @job.save
     redirect_to @job
+    JobMailer.with(user: @job.users.second).payment_received_email.deliver_now 
   end
 
   # POST /jobs
@@ -112,6 +115,7 @@ class JobsController < ApplicationController
         format.json { render json: @job.errors, status: :unprocessable_entity }
       end
     end
+    JobMailer.with(user: current_user).job_posted_email.deliver_now 
   end
 
   # PATCH/PUT /jobs/1
@@ -155,8 +159,8 @@ class JobsController < ApplicationController
     # creates the user _job entry when a job is creates
     def create_user_job
       @user_job = UserJob.new 
-      @user_job.user_id = current_user.id
-      @user_job.job_id = Job.last.id
+      @user_job.user = current_user
+      @user_job.job = Job.last
       @user_job.save
     end
 
