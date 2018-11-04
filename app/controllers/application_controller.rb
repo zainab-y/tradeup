@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
     include Pundit
     before_action :configure_permitted_parameters, if: :devise_controller?
+    # prevents saving of cached page
+    before_action :set_no_cache
 
     protected
 
@@ -14,6 +16,14 @@ class ApplicationController < ActionController::Base
         else
             root_path
         end
+    end
+
+    private 
+
+    def set_no_cache
+        response.headers["Cache-Control"] = "no-cache, no-store, max-age=0, must-revalidate"
+        response.headers["Pragma"] = "no-cache"
+        response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
     end
 end
 
