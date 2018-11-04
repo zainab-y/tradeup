@@ -3,29 +3,57 @@
 <%= image_tag @profile_image, width: '200', border: '1px, solid, black' %>
 
 <p>
-  <strong>Name:</strong>
-  <%= @user_profile.name %>
-</p>
-
-<p>
-  <strong>Bio:</strong>
-  <%= @user_profile.bio %>
-</p>
-
-<p>
-  <strong>Contact number:</strong>
-  <%= @user_profile.contact %>
-</p>
-
-<p>
   <strong>Email:</strong>
   <%= @user_profile.user.email %>
 </p>
 
-<p>
-  <strong>Address:</strong>
-  <%= @user_profile.street_number %> <%= @user_profile.street_name %>, <%= @user_profile.city %>, <%= @user_profile.postcode %>
-</p>
+<% if @user_profile.name.present? %>
+  <p>
+    <strong>Name:</strong>
+    <%= @user_profile.name %>
+  </p>
+<% end %>
+
+<% if @user_profile.bio.present? %>
+  <p>
+    <strong>Bio:</strong>
+    <%= @user_profile.bio %>
+  </p>
+<% end %>
+
+<% if @user_profile.contact.present? %>
+  <p>
+    <strong>Contact number:</strong>
+    <%= @user_profile.contact %>
+  </p>
+<% end %>
+
+<% if @user_profile.street_number.present? %>
+  <p>
+    <strong>Business Address:</strong>
+    <%= @user_profile.street_number %> <%= @user_profile.street_name %>, 
+    <%= @user_profile.city %>, <%= @user_profile.postcode %>
+    <%= @user_profile.state %>
+  </p>
+<% end %>
+
+<% if @user_profile.abn.present? %>
+  <p>
+    <strong>ABN:</strong>
+    <%= @user_profile.abn %>
+  </p>
+<% end %>
+
+<% if @user_profile.insurance.present? %>
+  <p>
+    <strong>Insurance Number:</strong>
+    <%= @user_profile.insurance %>
+  </p>
+<% end %>
+
+<% if !@user_profile.name.present? && !@user_profile.bio.present? && !@user_profile.contact.present? %>
+  <p>Looks like your profile is incomplete, edit below:</p>
+<% end %>
 
 <% if current_user.id == @user_profile.user.id %>
   <%= link_to 'Edit', edit_user_profile_path(@user_profile) %> 
