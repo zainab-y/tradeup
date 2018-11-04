@@ -61,11 +61,11 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-  address:              'smtp.mailgun.org',
+  address:              ENV['MAILER_ADDRESS'],
   port:                 587,
-  domain:               'sandbox3016adbbf9264991afab8ad86d4a6976.mailgun.org',
-  user_name:            'postmaster@sandbox3016adbbf9264991afab8ad86d4a6976.mailgun.org',
-  password:             '83d3ab55f46f846b3e214d12168f1730-4836d8f5-a4bff183',
+  domain:               ENV['MAILER_DOMAIN'],
+  user_name:            ENV['MAILER_USER_NAME'],
+  password:             ENV['MAILER_PASSWORD'],
   authentication:       'plain',
   enable_starttls_auto: true }
 end
