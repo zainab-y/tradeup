@@ -59,7 +59,8 @@
 
   <div class="field">
     <%= form.label :images, "Images (this will assist the tradesman to assess the job prior to attendance): " %>
-    <%= form.file_field :images, multiple: true %>
+    <%= form.file_field :images, multiple: true, id: "file-input"%>
+    <div id="preview"></div>
   </div>
 
   <%= form.label :address, "Address of the property: *"%> 
@@ -158,4 +159,26 @@
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&libraries=places&callback=initAutocomplete"
     async defer>
+</script>
+
+<%# image upload %>
+<script>
+  function previewImages () {
+    var $preview = $('#preview').empty();
+    if (this.files) $.each(this.files, readAndPreview);
+
+    function readAndPreview (i, file) {
+      if (!/\.(jpe?g|png|gif)$/i.test(file.name)){
+        return alert(file.name + ' is not an image');
+      }
+
+      var reader = new FileReader();
+      $(reader).on('load', function () {
+        $preview.append($('<img/>', { src:this.result, height:100 }));
+      });
+      reader.readAsDataURL(file);
+    }
+  }
+
+  $('#file-input').on('change', previewImages);
 </script>
