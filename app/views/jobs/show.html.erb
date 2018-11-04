@@ -27,20 +27,61 @@
   </p>
 
   <p>
-    <strong>Job Description:</strong>
-    <%= @job.description %>
+    <strong>Job Satus:</strong>
+    <%= @job.job_status.status %>
   </p>
 
   <p>
-    <strong>Time:</strong>
-    <%= @job.tenant_available_time %>
+    <strong>Job Description:</strong>
+    <%= @job.description %>
   </p>
 
   <p>
     <strong>Price:</strong>
     <%= number_to_currency(@job.price/100.0) %>
   </p>
-  
+
+  <p>
+    <strong>Available Time:</strong>
+    <%= @job.tenant_available_time %>
+  </p>
+
+  <% if @is_job_creator || @job_status == 2  %>
+    <p>
+      <strong>Job Address:</strong> <br>
+      <%= @job.street_number %> <%= @job.street_name %>, <br>
+      <%= @job.city  %>, <%= @job.postcode %> <br>
+      <%= @job.state %>
+    </p>
+
+    <p>
+      <strong>Tenant 1:</strong>
+      <%= @job.tenant_one_name %>
+    </p>
+
+    <p>
+      <strong>Tenant 1 Contact Number:</strong>
+      <%= @job.tenant_one_contact %>
+    </p>
+
+    <p>
+      <strong>Tenant 2:</strong>
+      <%= @job.tenant_two_name %>
+    </p>
+
+    <p>
+      <strong>Tenant 2 Contact Number:</strong>
+      <%= @job.tenant_two_contact %>
+    </p>
+  <% end %>
+
+  <% if !@is_job_creator && @job_status == 1 %>
+    <p>
+      <strong>Job Location:</strong>
+      <%= @job.city %>, <%= @job.state  %>
+    </p>
+  <% end %>
+
 </div>
 <br>
 <br>
