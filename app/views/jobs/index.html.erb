@@ -10,11 +10,12 @@
   <thead>
     <tr>
       <th>Job Title</th>
+      <th>Job Category</th>
+      <th>Job Location</th>
       <th>Creator</th>
-      <th>Description</th>
+      <th>Job Status</th>
       <th>Tenant's available time</th>
       <th>Price</th>
-      <th>Job Status</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -23,15 +24,18 @@
     <% @jobs.each do |job| %>
       <tr>
         <td><%= job.title %></td>
+        <td><%= job.job_category.category %></td>
+        <td><%= job.city %>, <%= job.state %></td>
         <td>
           <a href="user_profiles/<%=job.users.first.user_profile.id%>">
             <%= job.users.first.username %>
           </a>
         </td>
-        <td><%= job.description %></td>
+        <td><%= job.job_status.status.capitalize %></td>
         <td><%= job.tenant_available_time %></td>
         <td><%= number_to_currency(job.price/100.0) %></td>
-        <td><%= job.job_status.status.capitalize %></td>
+
+        <%# links %>
         <td><%= link_to 'Preview', job %></td>
         <% if !current_user.nil? && current_user.id == job.users.first.id %>
           <td><%= link_to 'Edit Job', edit_job_path(job) %></td>
