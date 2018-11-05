@@ -111,6 +111,8 @@
     <%= form.text_field :price, :required => true, value: number_with_precision((job.price||0)/100.0, :precision => 2) %>
   </div>
 
+  <% raise %>
+
   <div class="actions">
     <%= form.submit %>
   </div>

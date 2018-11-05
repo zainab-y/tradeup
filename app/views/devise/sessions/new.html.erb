@@ -26,6 +26,9 @@
   <% if params[:job_category] %>
     <%= f.hidden_field :job_category, value: params[:job_category] %>
   <% end %>
+  <% if params[:become_tradie] %>
+    <%= f.hidden_field :become_tradie, value: params[:become_tradie] %>
+  <% end %>
 
   <div class="actions">
     <%= f.submit "Log in" %>
