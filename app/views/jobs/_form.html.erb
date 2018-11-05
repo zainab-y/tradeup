@@ -1,3 +1,5 @@
+
+
 <%= form_with(model: job, local: true) do |form| %>
   <% if job.errors.any? %>
     <div id="error_explanation">
@@ -35,8 +37,9 @@
   <div class="field">
     <%= form.label :images, "Images (this will assist the tradesman to assess the job prior to attendance): " %>
     <%# <%= form.file_field :images, multiple: true %>
-    <div class="drag_and_drop" id: "file-input"><%= form.drag_and_drop_file_field :images, multiple: true %></div>
-    <div id="preview"></div>
+    <div class="drag_and_drop dash-area">
+      <%= form.drag_and_drop_file_field :images, multiple: true %>
+    </div>
   </div>
 
   <div class="field">
@@ -162,24 +165,12 @@
     async defer>
 </script>
 
-<%# preview image %>
-<script>
-  function previewImages () {
-    var $preview = $('#preview').empty();
-    if (this.files) $.each(this.files, readAndPreview);
 
-    function readAndPreview (i, file) {
-      if (!/\.(jpe?g|png|gif)$/i.test(file.name)){
-        return alert(file.name + ' is not an image');
-      }
-
-      var reader = new FileReader();
-      $(reader).on('load', function () {
-        $preview.append($('<img/>', { src:this.result, height:100 }));
-      });
-      reader.readAsDataURL(file);
-    }
-  }
-
-  $('#file-input').on('change', previewImages);
-</script>
+<style>
+.asdndzone {
+  border: 4px dashed #ccc;
+  max-width: 400px;
+  display: block;
+  padding: 1em;
+}
+</style>
