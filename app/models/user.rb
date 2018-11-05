@@ -6,4 +6,9 @@ class User < ApplicationRecord
   has_many :user_jobs
   has_many :jobs, through: :user_jobs
   validates :username, presence: :true, uniqueness: { case_sensitive: false }
+
+  protected
+  def confirmation_required?
+    false
+  end
 end

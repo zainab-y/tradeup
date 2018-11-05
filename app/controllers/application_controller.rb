@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
         if params[:user][:job_category]
             new_job_path(:job_category => params[:user][:job_category])
         else
-            root_path
+            pages_signin_path
         end
     end
 
