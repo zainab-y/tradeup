@@ -1,3 +1,5 @@
+
+
 <%= form_with(model: job, local: true) do |form| %>
   <% if job.errors.any? %>
     <div id="error_explanation">
@@ -33,6 +35,14 @@
   </div>
 
   <div class="field">
+    <%= form.label :images, "Images (this will assist the tradesman to assess the job prior to attendance): " %>
+    <%# <%= form.file_field :images, multiple: true %>
+    <div class="drag_and_drop dash-area">
+      <%= form.drag_and_drop_file_field :images, multiple: true %>
+    </div>
+  </div>
+
+  <div class="field">
     <%= form.label :first_tenant_name, "First tenant name: *" %>
     <%= form.text_area :tenant_one_name, :required => true %>
   </div>
@@ -57,12 +67,15 @@
     <%= form.datetime_select :tenant_available_time, :required => true %>
   </div>
 
+<<<<<<< HEAD
   <div class="field">
     <%= form.label :images, "Images (this will assist the tradesman to assess the job prior to attendance): " %>
     <%= form.file_field :images, multiple: true, id: "file-input"%>
     <div id="preview"></div>
   </div>
 
+=======
+>>>>>>> 45264f379852e4b956a01ed64b668c2a9509a277
   <%= form.label :address, "Address of the property: *"%> 
   <div id="locationField">
       <input id="autocomplete" placeholder="Enter peoperty address" type="text" style="width:500px;"></input>
@@ -161,6 +174,7 @@
     async defer>
 </script>
 
+<<<<<<< HEAD
 <%# image upload %>
 <script>
   function previewImages () {
@@ -182,3 +196,14 @@
 
   $('#file-input').on('change', previewImages);
 </script>
+=======
+
+<style>
+.asdndzone {
+  border: 4px dashed #ccc;
+  max-width: 400px;
+  display: block;
+  padding: 1em;
+}
+</style>
+>>>>>>> 45264f379852e4b956a01ed64b668c2a9509a277
