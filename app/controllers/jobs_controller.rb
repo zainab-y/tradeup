@@ -8,22 +8,32 @@ class JobsController < ApplicationController
   # GET /jobs
   # GET /jobs.json
   def index
-    # jobs that haven't been accepted, so jobs with only one user will be displayed, jobs with two users won't display
-    @jobs = []
-    Job.all.each do |job|
-      if job.users.count < 2
-        @jobs << job
-      end
-    end
+    # Search function
+    if params[:job] && params[:job][:category_id].present? && params[:postcode].present?
+      category_search = JobCategory.find(params[:job][:category_id])
+      postcode_search = params[:postcode]
+      search_result = Job.where("postcode = ? AND job_category_id = ?", postcode_search, category_search.id)
+      @jobs = select_available_jobs(search_result)
 
-    if params[:job] && params[:job][:category_id]
-      search = JobCategory.find(params[:job][:category_id])
-      job_category_search = JobCategory.where(category: search.category)
+      @message = "Search result for: #{category_search.category} in #{postcode_search}"
+    elsif params[:job] && params[:job][:category_id].present?
+      category_search = JobCategory.find(params[:job][:category_id])
+      job_category_search = JobCategory.where(category: category_search.category)
       job_category_search = job_category_search.first
-      @jobs = job_category_search.jobs
-    else 
-      @jobs
-    end
+      search_result = job_category_search.jobs
+      @jobs = select_available_jobs(search_result)
+
+      @message = "Search result for: #{category_search.category}"
+    elsif params[:postcode].present?
+      postcode_search = params[:postcode]
+      job_postcode_search = Job.where(postcode: postcode_search)
+      @jobs = select_available_jobs(job_postcode_search)
+
+      @message = "Search Result for Postcode: #{postcode_search}"
+    else
+      @jobs = select_available_jobs(Job.all)
+    end 
+    
   end
 
   # GET /jobs/1
@@ -176,6 +186,17 @@ class JobsController < ApplicationController
       else
         redirect_to new_user_registration_path(:job_category => params[:job][:category_id])
       end
+    end
+
+    # jobs that haven't been accepted, so jobs with only one user will be displayed, jobs with two users won't display
+    def select_available_jobs(array)
+      jobs = []
+      array.each do |job|
+        if job.users.count <2
+          jobs << job
+        end
+      end
+      return jobs
     end
 end
 

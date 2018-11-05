@@ -1,3 +1,5 @@
+
+
 <%= form_with(model: job, local: true) do |form| %>
   <% if job.errors.any? %>
     <div id="error_explanation">
@@ -33,6 +35,14 @@
   </div>
 
   <div class="field">
+    <%= form.label :images, "Images (this will assist the tradesman to assess the job prior to attendance): " %>
+    <%# <%= form.file_field :images, multiple: true %>
+    <div class="drag_and_drop dash-area">
+      <%= form.drag_and_drop_file_field :images, multiple: true %>
+    </div>
+  </div>
+
+  <div class="field">
     <%= form.label :first_tenant_name, "First tenant name: *" %>
     <%= form.text_area :tenant_one_name, :required => true %>
   </div>
@@ -55,11 +65,6 @@
   <div class="field">
     <%= form.label :tenant_available_time, "Tenant's available time: *"%>
     <%= form.datetime_select :tenant_available_time, :required => true %>
-  </div>
-
-  <div class="field">
-    <%= form.label :images, "Images (this will assist the tradesman to assess the job prior to attendance): " %>
-    <%= form.file_field :images, multiple: true %>
   </div>
 
   <%= form.label :address, "Address of the property: *"%> 
@@ -159,3 +164,11 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&libraries=places&callback=initAutocomplete"
     async defer>
 </script>
+
+<style>
+  .asdndzone {
+    padding: 3em;
+    border: 1px dashed grey;
+    max-width: 350px;
+  }
+  </style>
