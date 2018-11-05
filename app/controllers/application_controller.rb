@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
         elsif params[:user][:become_tradie]
             edit_user_profile_path(current_user.user_profile.id, :abn_insurance => 0)
         else
-            root_path
+            pages_signin_path
         end
     end
 

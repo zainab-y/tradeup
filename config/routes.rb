@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   match "/500", :to => "errors#internal_server_error", :via => :all
 
   root 'pages#welcome'
+  get 'pages/signin', to: 'pages#signin', as: 'pages_signin'
 
   #user profile routes
   resources :user_profiles
@@ -14,7 +15,7 @@ Rails.application.routes.draw do
   get 'show/edit'
   get 'show/new'
 
-  devise_for :users, controllers: { registrations: 'users/registrations' }
+  devise_for :users, controllers: { registrations: 'users/registrations'}
   
   resources :jobs
   get 'jobs/:id/accept', to: 'jobs#accept', as: 'jobs_accept'
