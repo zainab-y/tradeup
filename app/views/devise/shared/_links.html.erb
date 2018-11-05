@@ -1,6 +1,8 @@
 <%- if controller_name != 'sessions' %>
   <% if params[:job_category] %>
     <%= link_to "Log in", new_session_path(resource_name, :job_category => params[:job_category], :postcode => params[:postcode] )%> <br />
+  <% elsif params[:become_tradie]%>
+    <%= link_to "Log in", new_session_path(resource_name, :become_tradie => 0) %>
   <% else %>
     <%= link_to "Log in", new_session_path(resource_name) %><br />
   <% end %>

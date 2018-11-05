@@ -13,7 +13,7 @@
         <%= link_to('Sign Up', new_user_registration_path) %>
         <%= link_to('Sign In', new_user_session_path) %>
         <%= link_to('View All Jobs', jobs_path) %>
-        <%= link_to("Become a Tradie", new_user_registration_path) %>
+        <%= link_to("Become a Tradie", new_user_registration_path(become_tradie: 0)) %>
     <% end %>
 </nav>
 <hr>

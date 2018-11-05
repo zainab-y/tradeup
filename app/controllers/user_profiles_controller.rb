@@ -62,9 +62,6 @@ class UserProfilesController < ApplicationController
     end
   end
 
-  def trades_form
-  end
-
   # POST /user_profiles
   # POST /user_profiles.json
   def create
