@@ -3,82 +3,23 @@
 <% if @my_jobs.count > 0 %>
     <h2>Jobs I Created: </h2>
     <% @my_jobs.each do |job| %>
-        <p>Title: <%= job.title %></p><br>
-        <%# if !job.images.empty? %>
-            <%# (0...job.images.count).each do |image| %>
-                <%#= image_tag job.images[image], width:'300'%>
-            <%# end %>
-        <%# end %>
-        <p>Creator: <%= job.users.first.username %></p>
-        <p>Status: <%= job.job_status.status.capitalize %></p>
-        <p>Tenant Available Time: <%= job.tenant_available_time %></p>
-        <p>Price: <%= number_to_currency(job.price/100.0) %></p>
         <p>Category: <%= job.job_category.category %></p>
-        <p>Job Location: <%= job.city %>, <%= job.state %></p>
+        <p>Title: <%= job.title %></p>
+        <p>Price: <%= number_to_currency(job.price/100.0) %></p>
+        <p>Time: <%= job.tenant_available_time %></p>
 
-        <%= link_to 'View Job', job %>
+        <%= link_to 'Check Details', job %>
         <hr>
     <% end %>
 <% end %>
 
-<% if @accepted_jobs.count > 0 %>
-    <h2>Jobs I have Accepted: </h2>
-    <% @accepted_jobs.each do |job| %>
-        <p>Title: <%= job.title %></p><br>
-        <%# if !job.images.empty? %>
-            <%# (0...job.images.count).each do |image| %>
-                <%#= image_tag job.images[image], width:'300'%>
-            <%# end %>
-        <%# end %>
-        <p>Creator: <%= job.users.first.username %></p>
-        <p>Status: <%= job.job_status.status.capitalize %></p>
-        <p>Tenant Available Time: <%= job.tenant_available_time %></p>
-        <p>Price: <%= number_to_currency(job.price/100.0) %></p>
-        <p>Category: <%= job.job_category.category %></p>
-        <p>Job Location: <%= job.city %>, <%= job.state %></p>
-
-        <%= link_to 'View Job', job %>
-        <%= link_to 'Job completed', jobs_complete_path(job.id) %>
-    <hr>
-    <% end %>
-<% end %>
-
-<% if @is_job_acceptor_completed.count > 0 %>
-    <h2>Jobs I Completed: </h2>
-    <% @is_job_acceptor_completed.each do |job| %>
-        <p>Title: <%= job.title %></p><br>
-        <%# if !job.images.empty? %>
-            <%# (0...job.images.count).each do |image| %>
-                <%#= image_tag job.images[image], width:'300'%>
-            <%# end %>
-        <%# end %>
-        <p>Creator: <%= job.users.first.username %></p>
-        <p>Status: <%= job.job_status.status.capitalize %></p>
-        <p>Tenant Available Time: <%= job.tenant_available_time %></p>
-        <p>Price: <%= number_to_currency(job.price/100.0) %></p>
-        <p>Category: <%= job.job_category.category %></p>
-        <p>Job Location: <%= job.city %>, <%= job.state %></p>
-
-        <%= link_to 'View Job', job %>
-    <hr>
-    <% end %>
-<% end %>
-
 <% if @is_job_creator_completed.count > 0 %>
-    <h2>Jobs Completed by other user: </h2>
+    <h2>Jobs pending on payment: </h2>
     <% @is_job_creator_completed.each do |job| %>
-        <p>Title: <%= job.title %></p><br>
-        <%# if !job.images.empty? %>
-            <%# (0...job.images.count).each do |image| %>
-                <%#= image_tag job.images[image], width:'300'%>
-            <%# end %>
-        <%# end %>
-        <p>Creator: <%= job.users.first.username %></p>
-        <p>Status: <%= job.job_status.status.capitalize %></p>
-        <p>Tenant Available Time: <%= job.tenant_available_time %></p>
-        <p>Price: <%= number_to_currency(job.price/100.0) %></p>
         <p>Category: <%= job.job_category.category %></p>
-        <p>Job Location: <%= job.city %>, <%= job.state %></p>
+        <p>Title: <%= job.title %></p>
+        <p>Price: <%= number_to_currency(job.price/100.0) %></p>
+        <p>Time: <%= job.tenant_available_time %></p>
         <%= form_tag charges_path do %>
             <%= hidden_field_tag(:job_id, job.id) %>
             <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
@@ -88,8 +29,7 @@
             data-currency="aud"
             data-locale="auto"></script>
         <% end %>
-
-        <%= link_to 'View Job', job %>
+        <%= link_to 'Check Details', job %>
     <hr>
     <% end %>
 <% end %>
@@ -97,21 +37,38 @@
 <% if @is_job_creator_paid.count > 0 %>
     <h2>Jobs I have paid: </h2>
     <% @is_job_creator_paid.each do |job| %>
-        <p>Title: <%= job.title %></p><br>
-        <%# if !job.images.empty? %>
-            <%# (0...job.images.count).each do |image| %>
-                <%#= image_tag job.images[image], width:'300'%>
-            <%# end %>
-        <%# end %>
-        <p>Creator: <%= job.users.first.username %></p>
-        <p>Status: <%= job.job_status.status.capitalize %></p>
-        <p>Tenant Available Time: <%= job.tenant_available_time %></p>
+       <p>Category: <%= job.job_category.category %></p>
+        <p>Title: <%= job.title %></p>
         <p>Price: <%= number_to_currency(job.price/100.0) %></p>
-        <p>Category: <%= job.job_category.category %></p>
-        <p>Job Location: <%= job.city %>, <%= job.state %></p>
+        <p>Time: <%= job.tenant_available_time %></p>
+        <%= link_to 'Check Details', job %>
+    <hr>
+    <% end %>
+<% end %>
 
-        <%= link_to 'View Job', job %>
-        <%= link_to 'Pay' %>
+<% if @accepted_jobs.count > 0 %>
+    <h2>Jobs I have Accepted: </h2>
+    <% @accepted_jobs.each do |job| %>
+         <p>Category: <%= job.job_category.category %></p>
+        <p>Title: <%= job.title %></p>
+        <p>Price: <%= number_to_currency(job.price/100.0) %></p>
+        <p>Time: <%= job.tenant_available_time %></p>
+
+        <%= link_to 'Check Details', job %>
+        <%= link_to 'I\'ve completed this job', jobs_complete_path(job.id) %>
+    <hr>
+    <% end %>
+<% end %>
+
+<% if @is_job_acceptor_completed.count > 0 %>
+    <h2>Jobs I Completed: </h2>
+    <% @is_job_acceptor_completed.each do |job| %>
+         <p>Category: <%= job.job_category.category %></p>
+        <p>Title: <%= job.title %></p>
+        <p>Price: <%= number_to_currency(job.price/100.0) %></p>
+        <p>Time: <%= job.tenant_available_time %></p>
+
+        <%= link_to 'Check Details', job %>
     <hr>
     <% end %>
 <% end %>
@@ -119,21 +76,12 @@
 <% if @is_job_acceptor_paid.count > 0 %>
     <h2>Jobs I have been paid for: </h2>
     <% @is_job_acceptor_paid.each do |job| %>
-        <p>Title: <%= job.title %></p><br>
-        <%# if !job.images.empty? %>
-            <%# (0...job.images.count).each do |image| %>
-                <%#= image_tag job.images[image], width:'300'%>
-            <%# end %>
-        <%# end %>
-        <p>Creator: <%= job.users.first.username %></p>
-        <p>Status: <%= job.job_status.status.capitalize %></p>
-        <p>Tenant Available Time: <%= job.tenant_available_time %></p>
-        <p>Price: <%= number_to_currency(job.price/100.0) %></p>
         <p>Category: <%= job.job_category.category %></p>
-        <p>Job Location: <%= job.city %>, <%= job.state %></p>
+        <p>Title: <%= job.title %></p>
+        <p>Price: <%= number_to_currency(job.price/100.0) %></p>
+        <p>Time: <%= job.tenant_available_time %></p>
 
-        <%= link_to 'View Job', job %>
-        <%= link_to 'Pay' %>
+        <%= link_to 'Check Details', job %>
     <hr>
     <% end %>
 <% end %>
