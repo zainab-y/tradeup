@@ -1,12 +1,11 @@
-<p id="notice"><%= notice %></p>
-
 <h2>Job Search</h2>
 <%= form_tag jobs_path, method: :get do %>
+<%= label_tag :category %>
 <%= collection_select(:job, :category_id, JobCategory.all, :id, :category, :prompt => true) %> 
 <%= label_tag :postcode %> 
 <%= text_field_tag :postcode %>
 <%= submit_tag "Search" %>
-<%= link_to "Clear Search", jobs_path %>
+<%= link_to "Clear", jobs_path %>
 <% end %>
 
 <%# search result message %>

@@ -33,7 +33,6 @@ class JobsController < ApplicationController
     else
       @jobs = select_available_jobs(Job.all)
     end 
-    
   end
 
   # GET /jobs/1
@@ -188,7 +187,7 @@ class JobsController < ApplicationController
       end
     end
 
-    # jobs that haven't been accepted, so jobs with only one user will be displayed, jobs with two users won't display
+    # Method to select the jobs that are not accepted yet. Created but not accepted jobs have one user; Accepted jobs have two users.
     def select_available_jobs(array)
       jobs = []
       array.each do |job|
