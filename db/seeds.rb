@@ -8,8 +8,7 @@
 
 puts "seed starting"
 
-#Categories
-
+#Job Categories
 JobCategory.delete_all
 JobCategory.create(category: 'Air Con Servicing')
 JobCategory.create(category: 'Air Conditioner Installation')
@@ -148,10 +147,9 @@ JobCategory.create(category: 'Vinyl Flooring')
 
 #Job Statuses
 JobStatus.delete_all
-JobStatus.create(status: 'created')
-JobStatus.create(status: 'accepted')
-JobStatus.create(status: 'completed')
-JobStatus.create(status: 'paid')
-JobStatus.create(status: 'archived')
+JobStatus.create(status: 'Created')
+JobStatus.create(status: 'Accepted')
+JobStatus.create(status: 'Completed')
+JobStatus.create(status: 'Paid')
 
 puts "seed complete"
