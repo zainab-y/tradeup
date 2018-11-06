@@ -67,15 +67,6 @@
     <%= form.datetime_select :tenant_available_time, :required => true %>
   </div>
 
-<<<<<<< HEAD
-  <div class="field">
-    <%= form.label :images, "Images (this will assist the tradesman to assess the job prior to attendance): " %>
-    <%= form.file_field :images, multiple: true, id: "file-input"%>
-    <div id="preview"></div>
-  </div>
-
-=======
->>>>>>> 45264f379852e4b956a01ed64b668c2a9509a277
   <%= form.label :address, "Address of the property: *"%> 
   <div id="locationField">
       <input id="autocomplete" placeholder="Enter peoperty address" type="text" style="width:500px;"></input>
@@ -110,8 +101,6 @@
     <%= form.label :price, "Price: *" %>
     <%= form.text_field :price, :required => true, value: number_with_precision((job.price||0)/100.0, :precision => 2) %>
   </div>
-
-  <% raise %>
 
   <div class="actions">
     <%= form.submit %>
@@ -176,36 +165,10 @@
     async defer>
 </script>
 
-<<<<<<< HEAD
-<%# image upload %>
-<script>
-  function previewImages () {
-    var $preview = $('#preview').empty();
-    if (this.files) $.each(this.files, readAndPreview);
-
-    function readAndPreview (i, file) {
-      if (!/\.(jpe?g|png|gif)$/i.test(file.name)){
-        return alert(file.name + ' is not an image');
-      }
-
-      var reader = new FileReader();
-      $(reader).on('load', function () {
-        $preview.append($('<img/>', { src:this.result, height:100 }));
-      });
-      reader.readAsDataURL(file);
-    }
-  }
-
-  $('#file-input').on('change', previewImages);
-</script>
-=======
-
 <style>
-.asdndzone {
-  border: 4px dashed #ccc;
-  max-width: 400px;
-  display: block;
-  padding: 1em;
-}
-</style>
->>>>>>> 45264f379852e4b956a01ed64b668c2a9509a277
+  .asdndzone {
+    padding: 3em;
+    border: 1px dashed grey;
+    max-width: 350px;
+  }
+  </style>
