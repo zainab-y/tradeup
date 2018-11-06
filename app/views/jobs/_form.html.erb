@@ -1,5 +1,3 @@
-
-
 <%= form_with(model: job, local: true) do |form| %>
   <% if job.errors.any? %>
     <div id="error_explanation">
@@ -13,16 +11,16 @@
     </div>
   <% end %>
 
-    <div class="field">
-      <%= form.label :job_category, "Job category: *" %><br>
-      <% if params[:job] %>
-        <%= form.collection_select :job_category_id, JobCategory.all, :id, :category, :required => true, :include_blank => true, :selected => params[:job][:category_id] %>
-      <% elsif params[:job_category] %>
-        <%= form.collection_select :job_category_id, JobCategory.all, :id, :category, :required => true, :include_blank => true, :selected => params[:job_category] %>
-      <% else %>
-        <%= form.collection_select :job_category_id, JobCategory.all, :id, :category, :required => true, :include_blank => true %>
-      <% end %>
-    </div>
+  <div class="field">
+    <%= form.label :job_category, "Category: *" %><br>
+    <% if params[:job] %>
+      <%= form.collection_select :job_category_id, JobCategory.all, :id, :category, :required => true, :include_blank => true, :selected => params[:job][:category_id] %>
+    <% elsif params[:job_category] %>
+      <%= form.collection_select :job_category_id, JobCategory.all, :id, :category, :required => true, :include_blank => true, :selected => params[:job_category] %>
+    <% else %>
+      <%= form.collection_select :job_category_id, JobCategory.all, :id, :category, :required => true, :include_blank => true %>
+    <% end %>
+  </div>
 
   <div class="field">
     <%= form.label :title, "Title: *" %>
@@ -30,36 +28,8 @@
   </div>
 
   <div class="field">
-    <%= form.label :description, "Description: *" %>
-    <%= form.text_area :description, :required => true %>
-  </div>
-
-  <div class="field">
-    <%= form.label :images, "Images (this will assist the tradesman to assess the job prior to attendance): " %>
-    <%# <%= form.file_field :images, multiple: true %>
-    <div class="drag_and_drop dash-area">
-      <%= form.drag_and_drop_file_field :images, multiple: true %>
-    </div>
-  </div>
-
-  <div class="field">
-    <%= form.label :first_tenant_name, "First tenant name: *" %>
-    <%= form.text_area :tenant_one_name, :required => true %>
-  </div>
-
-  <div class="field">
-    <%= form.label :first_tenant_contact_number, "First tenant contact number: *" %>
-    <%= form.text_area :tenant_one_contact, :required => true %>
-  </div>
-
-  <div class="field">
-    <%= form.label :second_tenant_name %>
-    <%= form.text_area :tenant_two_name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :second_tenant_contact_number %>
-    <%= form.text_area :tenant_two_contact %>
+    <%= form.label :description, "Description:" %>
+    <%= form.text_area :description %>
   </div>
 
   <div class="field">
@@ -102,12 +72,41 @@
     <%= form.text_field :price, :required => true, value: number_with_precision((job.price||0)/100.0, :precision => 2) %>
   </div>
 
+  <div class="field">
+    <%= form.label :images, "Images:" %>
+    (this will assist the tradesman to assess the job prior to attendance):  
+    <%# <%= form.file_field :images, multiple: true %>
+    <div class="drag_and_drop dash-area">
+      <%= form.drag_and_drop_file_field :images, multiple: true %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :first_tenant_name, "Tenant name: *" %>
+    <%= form.text_area :tenant_one_name, :required => true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :first_tenant_contact_number, "Contact number: *" %>
+    <%= form.text_area :tenant_one_contact, :required => true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :second_tenant_name, "Second tenant name:" %>
+    <%= form.text_area :tenant_two_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :second_tenant_contact_number, "Contact number:" %>
+    <%= form.text_area :tenant_two_contact %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>
 
-
+<%# #Javascrpt for google map address autocomplete %>
 <script>
   // This example displays an address form, using the autocomplete feature
   // of the Google Places API to help users fill in the information.
