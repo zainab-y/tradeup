@@ -79,9 +79,17 @@
         <p>Price: <%= number_to_currency(job.price/100.0) %></p>
         <p>Category: <%= job.job_category.category %></p>
         <p>Job Location: <%= job.city %>, <%= job.state %></p>
+        <%= form_tag charges_path do %>
+            <%= hidden_field_tag(:job_id, job.id) %>
+            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+            data-description="A month's subscription"
+            data-amount="<%= job.price %>"
+            data-currency="aud"
+            data-locale="auto"></script>
+        <% end %>
 
         <%= link_to 'View Job', job %>
-        <%= link_to 'Pay' %>
     <hr>
     <% end %>
 <% end %>
