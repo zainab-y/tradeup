@@ -1,6 +1,10 @@
-<nav>   
-     <%= link_to(image_tag(asset_path('tradeup_logo.png'), width: '100'), root_path) %><br><br><br>
-
+<nav class="navbar"> 
+    <div class="wrapper">
+        <div class="logo">
+        <%= link_to(image_tag(asset_path('tradeup_logo.png'), width: '100'), root_path) %>
+        </div>
+    </div>
+        <div class="right-nav">
     <% if user_signed_in? %>
         <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
         <%= link_to('Edit Profile', edit_user_profile_path(current_user.user_profile.id)) %>
@@ -15,5 +19,5 @@
         <%= link_to('View All Jobs', jobs_path) %>
         <%= link_to("Become a Tradie", new_user_registration_path(become_tradie: 0)) %>
     <% end %>
+        </div>
 </nav>
-<hr>

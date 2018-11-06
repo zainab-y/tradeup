@@ -1,11 +1,14 @@
-<h1>Welcome to Trade Up!</h1>
 
-<h3>Need Somthing fixing?</h3>
+<div class="brush-image">
+    <div class="brush-text">
+      <h3>Need Something fixed?</h3>
+      <%= form_tag new_job_path, method: :get do |form| %>
+        <%= collection_select(:job, :category_id, JobCategory.all, :id, :category, :required => true, :include_blank => true) %>  
+        <br>
+         <button class="button"><%= submit_tag "Create Job" %></button>
 
-<%= form_tag new_job_path, method: :get do |form| %>
-    <%= collection_select(:job, :category_id, JobCategory.all, :id, :category, :required => true, :include_blank => true) %>  
-    <br>
+        <% end %> 
+    </div>
+</div>
 
-    <%= submit_tag "Create Job" %>
-<% end %> 
 
