@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h2>Search by category for job</h2>
+<h2>Job Search</h2>
 <%= form_tag jobs_path, method: :get do %>
 <%= collection_select(:job, :category_id, JobCategory.all, :id, :category, :prompt => true) %> 
 <%= label_tag :postcode %> 
@@ -15,13 +15,14 @@
 <table>
   <thead>
     <tr>
-      <th>Job Title</th>
-      <th>Job Category</th>
-      <th>Job Location</th>
-      <th>Creator</th>
-      <th>Job Status</th>
-      <th>Tenant's available time</th>
+      <th>Category</th>
+      <th>Postcode</th>
       <th>Price</th>
+      <th>Time</th>
+      <th>Title</th>
+      <%# <th>Job Location</th>
+      <th>Creator</th>
+      <th>Job Status</th> %>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -29,29 +30,29 @@
   <tbody>
     <% @jobs.each do |job| %>
       <tr>
-        <td><%= job.title %></td>
         <td><%= job.job_category.category %></td>
-        <td><%= job.city %>, <%= job.state %></td>
-        <td>
-          <a href="user_profiles/<%=job.users.first.user_profile.id%>">
-            <%= job.users.first.username %>
-          </a>
-        </td>
-        <td><%= job.job_status.status.capitalize %></td>
-        <td><%= job.tenant_available_time %></td>
+        <td><%= job.postcode %></td>
         <td><%= number_to_currency(job.price/100.0) %></td>
+        <td><%= job.tenant_available_time %></td>
+        <td><%= job.title %></td>
+        <%# to comment out the info we currently don't wanna show %>
+        <% if false %>
+          <td><%= job.city %>, <%= job.state %></td>
+          <td>
+            <a href="user_profiles/<%=job.users.first.user_profile.id%>">
+              <%= job.users.first.username %>
+            </a>
+          </td>
+          <td><%= job.job_status.status.capitalize %></td>
+        <% end %>
 
         <%# links %>
-        <td><%= link_to 'Preview', job %></td>
+        <td><%= link_to 'Job Details', job %></td>
         <% if !current_user.nil? && current_user.id == job.users.first.id %>
-          <td><%= link_to 'Edit Job', edit_job_path(job) %></td>
-          <td><%= link_to 'Delete Job', job, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Edit', edit_job_path(job) %></td>
+          <td><%= link_to 'Delete', job, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Job', new_job_path %>
