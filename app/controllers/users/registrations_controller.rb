@@ -78,6 +78,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def after_sign_up_path_for(resource)
     if params[:user][:job_category]
       new_job_path(:job_category => params[:user][:job_category])
+    elsif params[:user][:become_tradie]
+      root_path(:abn_insurance => 0)
     else
       root_path
     end

@@ -13,8 +13,10 @@ class ApplicationController < ActionController::Base
     def after_sign_in_path_for(resource)
         if params[:user][:job_category]
             new_job_path(:job_category => params[:user][:job_category])
+        elsif params[:user][:become_tradie]
+            edit_user_profile_path(current_user.user_profile.id, :abn_insurance => 0)
         else
-            root_path
+            pages_signin_path
         end
     end
 
