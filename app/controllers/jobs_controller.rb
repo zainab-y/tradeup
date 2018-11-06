@@ -38,27 +38,28 @@ class JobsController < ApplicationController
   # GET /jobs/1
   # GET /jobs/1.json 
   def show
+    # To decide whether the current user is the job creator or acceptor. The first user will always be the creator and the second user acceptor
     @is_job_creator = current_user == @job.users.first
     if @job.users.count > 1
       @is_job_acceptor = current_user == @job.users.second
     end
     @job_status = @job.job_status_id
+    # Define the message shown at different statuses to different users.
     # Statuses: 1 -> created, 2 -> accepted, 3 -> completed, 4 -> paid
-    # if the status is completed and not the creator of the job
     if @job_status == 1 && @is_job_creator
-        @message = "Congratulations your job is created! We will send you an email when someone takes the job!"
+        @message = "Congratulations! Your job is successfully created! We will send you an email when someone takes the job!"
     elsif @job_status == 1
-      @message = "This job is available. Click ACCEPT JOB if you would like to take the job"
+      @message = "This job is available. Click ACCEPT to take the job"
     elsif @job_status == 2 && @is_job_creator
-      @message = "Your job has been taken, waiting completion"
+      @message = "This job has been taken. We will send you an email when the job is completed"
     elsif @job_status == 2 && @is_job_acceptor
-      @message = "You have accepted this job, click complete when done"
+      @message = "You have accepted this job, click COMPLETE after you've finished the job"
     elsif @job_status == 3 && @is_job_acceptor
-      @message = "You have completed the job and now pending payment"
+      @message = "Waiting for payment. We will send you an email when the payment is received"
     elsif @job_status == 3 && @is_job_creator
-      @message = "The Job you have posted has been completed. Please make payment using the button below:"
+      @message = "The tradie has finished this job. Please make the payment"
     elsif @job_status == 4
-      @message = "The payment was successful! This order is now closed. Thank you!!!"
+      @message = "The job has been paid. Thank you for choosing TradeUp"
     end
 
   end
