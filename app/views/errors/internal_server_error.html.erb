@@ -1,7 +1,14 @@
-<h1>Well, this is unexpected...</h1>
+<div class="error">
+    <div class="card">
+        <%= image_tag asset_path("error.png") %>
 
-<%= image_tag asset_path("error.png") %>
-<p>Error code: 500</p>
-<p>
-    An error has occurred and we're working to fix the problem! We'll be up and running shortly.
-</p>
+        <div class="text">
+            <h1>Well, this is unexpected...</h1>
+
+            <p>Error code: 500</p>
+            <p>
+                An error has occurred and we're working to fix the problem! We'll be up and running shortly.
+            </p>
+        </div>
+    </div>
+</div>

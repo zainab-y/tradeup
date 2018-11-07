@@ -1,87 +1,144 @@
-<h1>My Jobs</h1>
+<div class="my-job">
 
-<% if @my_jobs.count > 0 %>
-    <h2>Jobs I Created: </h2>
-    <% @my_jobs.each do |job| %>
-        <p>Category: <%= job.job_category.category %></p>
-        <p>Title: <%= job.title %></p>
-        <p>Price: <%= number_to_currency(job.price/100.0) %></p>
-        <p>Time: <%= job.tenant_available_time %></p>
+    <h1 class="title">My Jobs</h1>
 
-        <%= link_to 'Check Details', job %>
-        <hr>
+    <% if @my_jobs.count > 0 %>
+        <div class="jobs-i-created">
+            <h2 class="header">Jobs I Created: </h2>
+            <% @my_jobs.each do |job| %>
+                <div class="card">
+                    <div class="details">
+                        <p>Category: <%= job.job_category.category %></p>
+                        <p>Title: <%= job.title %></p>
+                        <p>Price: <%= number_to_currency(job.price/100.0) %></p>
+                        <p>Time: <%= job.tenant_available_time %></p>
+                    </div>
+                    <div class="links">
+                        <button>
+                            <%= link_to 'Check Details', job%>
+                        </button>
+                    </div>
+                </div>
+            <% end %>
+        </div>
     <% end %>
-<% end %>
 
-<% if @is_job_creator_completed.count > 0 %>
-    <h2>Jobs pending on payment: </h2>
-    <% @is_job_creator_completed.each do |job| %>
-        <p>Category: <%= job.job_category.category %></p>
-        <p>Title: <%= job.title %></p>
-        <p>Price: <%= number_to_currency(job.price/100.0) %></p>
-        <p>Time: <%= job.tenant_available_time %></p>
-        <%= form_tag charges_path do %>
-            <%= hidden_field_tag(:job_id, job.id) %>
-            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-            data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-            data-description="A month's subscription"
-            data-amount="<%= job.price %>"
-            data-currency="aud"
-            data-locale="auto"></script>
-        <% end %>
-        <%= link_to 'Check Details', job %>
-    <hr>
+    <% if @is_job_creator_completed.count > 0 %>
+        <div class="jobs-pending-payment">
+            <h2>Jobs pending on payment: </h2>
+            <% @is_job_creator_completed.each do |job| %>
+                <div class="card">
+                    <div class="details">
+                        <p>Category: <%= job.job_category.category %></p>
+                        <p>Title: <%= job.title %></p>
+                        <p>Price: <%= number_to_currency(job.price/100.0) %></p>
+                        <p>Time: <%= job.tenant_available_time %></p>
+                    </div>
+                    <div class="links">
+                        <button>                        
+                        <%= form_tag charges_path do %>
+                            <%= hidden_field_tag(:job_id, job.id) %>
+                            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                            data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                            data-description="A month's subscription"
+                            data-amount="<%= job.price %>"
+                            data-currency="aud"
+                            data-locale="auto"></script>
+                        <% end %>
+                        </button>
+                        <button>
+                            <%= link_to 'Check Details', job %>
+                        </button>
+                    </div>
+                </div>
+            <% end %>
+        </div>
     <% end %>
-<% end %>
 
-<% if @is_job_creator_paid.count > 0 %>
-    <h2>Jobs I have paid: </h2>
-    <% @is_job_creator_paid.each do |job| %>
-       <p>Category: <%= job.job_category.category %></p>
-        <p>Title: <%= job.title %></p>
-        <p>Price: <%= number_to_currency(job.price/100.0) %></p>
-        <p>Time: <%= job.tenant_available_time %></p>
-        <%= link_to 'Check Details', job %>
-    <hr>
+    <% if @is_job_creator_paid.count > 0 %>
+        <div class="jobs-i-paid">
+            <h2>Jobs I have paid: </h2>
+            <% @is_job_creator_paid.each do |job| %>
+                <div class="card">
+                    <div class="details">                
+                        <p>Category: <%= job.job_category.category %></p>
+                        <p>Title: <%= job.title %></p>
+                        <p>Price: <%= number_to_currency(job.price/100.0) %></p>
+                        <p>Time: <%= job.tenant_available_time %></p>
+                    </div>
+                    <div class="links">
+                        <button>
+                            <%= link_to 'Check Details', job %>
+                        </button>
+                    </div>
+                </div>
+            <% end %>
+        </div>
     <% end %>
-<% end %>
 
-<% if @accepted_jobs.count > 0 %>
-    <h2>Jobs I have Accepted: </h2>
-    <% @accepted_jobs.each do |job| %>
-         <p>Category: <%= job.job_category.category %></p>
-        <p>Title: <%= job.title %></p>
-        <p>Price: <%= number_to_currency(job.price/100.0) %></p>
-        <p>Time: <%= job.tenant_available_time %></p>
-
-        <%= link_to 'Check Details', job %>
-        <%= link_to 'I\'ve completed this job', jobs_complete_path(job.id) %>
-    <hr>
+    <% if @accepted_jobs.count > 0 %>
+        <div class="jobs-i-accept">
+            <h2>Jobs I have Accepted: </h2>
+            <% @accepted_jobs.each do |job| %>
+                <div class="card">
+                    <div class="details">                
+                        <p>Category: <%= job.job_category.category %></p>
+                        <p>Title: <%= job.title %></p>
+                        <p>Price: <%= number_to_currency(job.price/100.0) %></p>
+                        <p>Time: <%= job.tenant_available_time %></p>
+                    </div>
+                    <div class="links">
+                        <button>
+                            <%= link_to 'Check Details', job %>
+                        </button>
+                        <button>
+                            <%= link_to 'Completed', jobs_complete_path(job.id) %>
+                        </button>
+                    </div>
+                </div>
+            <% end %>
+        </div>
     <% end %>
-<% end %>
 
-<% if @is_job_acceptor_completed.count > 0 %>
-    <h2>Jobs I Completed: </h2>
-    <% @is_job_acceptor_completed.each do |job| %>
-         <p>Category: <%= job.job_category.category %></p>
-        <p>Title: <%= job.title %></p>
-        <p>Price: <%= number_to_currency(job.price/100.0) %></p>
-        <p>Time: <%= job.tenant_available_time %></p>
-
-        <%= link_to 'Check Details', job %>
-    <hr>
+    <% if @is_job_acceptor_completed.count > 0 %>
+        <div class="jobs-i-complete">
+            <h2>Jobs I Completed: </h2>
+            <% @is_job_acceptor_completed.each do |job| %>
+                <div class="card">
+                    <div class="details">                
+                        <p>Category: <%= job.job_category.category %></p>
+                        <p>Title: <%= job.title %></p>
+                        <p>Price: <%= number_to_currency(job.price/100.0) %></p>
+                        <p>Time: <%= job.tenant_available_time %></p>
+                    </div>
+                    <div class="links">
+                        <button>
+                            <%= link_to 'Check Details', job %>
+                        </button>
+                    </div>
+                </div>
+            <% end %>
+        </div>
     <% end %>
-<% end %>
 
-<% if @is_job_acceptor_paid.count > 0 %>
-    <h2>Jobs I have been paid for: </h2>
-    <% @is_job_acceptor_paid.each do |job| %>
-        <p>Category: <%= job.job_category.category %></p>
-        <p>Title: <%= job.title %></p>
-        <p>Price: <%= number_to_currency(job.price/100.0) %></p>
-        <p>Time: <%= job.tenant_available_time %></p>
-
-        <%= link_to 'Check Details', job %>
-    <hr>
+    <% if @is_job_acceptor_paid.count > 0 %>
+        <div class="jobs-paid">
+            <h2>Jobs I have been paid for: </h2>
+            <% @is_job_acceptor_paid.each do |job| %>
+                <div class="card">
+                    <div class="details">                
+                        <p>Category: <%= job.job_category.category %></p>
+                        <p>Title: <%= job.title %></p>
+                        <p>Price: <%= number_to_currency(job.price/100.0) %></p>
+                        <p>Time: <%= job.tenant_available_time %></p>
+                    </div>
+                    <div class="links">
+                        <button>
+                            <%= link_to 'Check Details', job %>
+                        </button>
+                    </div>
+                </div>
+            <% end %>
+        </div>
     <% end %>
-<% end %>
+</div>

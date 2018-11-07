@@ -17,7 +17,7 @@
 @import "jobs/index";
 
 body, html {
-    background-color: white;
+    background-color: #C4C4C4;
     height: 80vh;
     margin: 0px;
 
@@ -50,7 +50,10 @@ body, html {
     top: 50%;
     left: 50%;
     transform: translate(-40%, -90%);
-    color: white;
+    width: 70vw;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
 }
 
 h3 {
@@ -88,6 +91,8 @@ h3 {
     border-radius: 5px;
     margin: 0px;
     position: sticky;
+    width: 40vw;
+    margin-top: 80%;
   }
   .grid {
     min-height: 30px;
@@ -101,6 +106,11 @@ h3 {
     font-weight: normal;
     line-height: normal;
     font-size: 24px;
+    border: none;
+    border-radius: 5px;
+  }
+  input {
+    color: white;
   }
   #job_category_id {
 
@@ -117,5 +127,5 @@ h3 {
    padding: 5px 10px;
    text-overflow: ellipsis;
    white-space: nowrap;
-   width: 300px;
+   width: 150%;
   }
