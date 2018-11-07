@@ -1,0 +1,62 @@
+.my-job {
+    display: flex;
+    flex-flow: row wrap;
+    .title {
+        display: block;
+        color: #EE8071;
+        width: 100vw;
+        text-align: center;
+        font-size: 40px;
+        padding:20px;
+    }
+    h2 {
+        margin-left: 10vw;
+        font-size: 20px;
+    }
+
+    .jobs-i-created {
+        
+    }
+
+    .jobs-pending-payment {
+        width: 50vw;
+    }
+
+    .jobs-i-paid {
+        width: 50vw;
+    }
+
+    .jobs-i-complete {
+        width:50vw;
+    }
+
+    .jobs-paid {
+        width: 50vw;
+    }
+
+    .jobs-i-accept {
+        width: 50vw;
+    }
+
+    .card {
+        display: flex;
+        justify-content: space-between;
+        background: white;
+        padding: 10px;
+        border-radius: 5px;
+        margin-left: 5vw;
+        margin-right: 5vw;
+        width: 35vw;
+        margin-bottom:10px;
+        .links {
+            width: 120px;
+            text-align: right;
+            button {
+                border: 1px solid #EE8071;
+                width: 115px;
+                border-radius: 5px;
+                margin-bottom: 10px;
+            }
+        }
+    }
+}

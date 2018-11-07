@@ -1,57 +1,74 @@
-<% if @user_profile.name.present? %>
-  <h3>Hi, I'm <%= @user_profile.name %>!</h3>
-<% end %>
+<div class="user-profile">
+    <% if @user_profile.name.present? %>
+      <h3>Hi, I'm <%= @user_profile.name %>!</h3>
+    <% else %>
+      <h3></h3>
+    <% end %>
 
-<%= image_tag @profile_image, width: '200', border: '1px, solid, black' %>
+  <div class="card">
+    <div class="profile">
+      <%= image_tag @profile_image, width: '200', :class => "image" %>
+    </div>
 
-<p>
-  <strong>Email:</strong>
-  <%= @user_profile.user.email %>
-</p>
+    <div class="details">
+      
+      <p>
+        <strong>Email:</strong>
+        <%= @user_profile.user.email %>
+      </p>
 
-<% if @user_profile.bio.present? %>
-  <p>
-    <strong>Bio:</strong>
-    <%= @user_profile.bio %>
-  </p>
-<% end %>
+      <% if @user_profile.bio.present? %>
+        <p>
+          <strong>Bio:</strong>
+          <%= @user_profile.bio %>
+        </p>
+      <% end %>
 
-<% if @user_profile.contact.present? %>
-  <p>
-    <strong>Contact number:</strong>
-    <%= @user_profile.contact %>
-  </p>
-<% end %>
+      <% if @user_profile.contact.present? %>
+        <p>
+          <strong>Contact number:</strong>
+          <%= @user_profile.contact %>
+        </p>
+      <% end %>
 
-<% if @user_profile.street_number.present? %>
-  <p>
-    <strong>Business Address:</strong>
-    <%= @user_profile.street_number %> <%= @user_profile.street_name %>, 
-    <%= @user_profile.city %>, <%= @user_profile.postcode %>
-    <%= @user_profile.state %>
-  </p>
-<% end %>
+      <% if @user_profile.street_number.present? %>
+        <p>
+          <strong>Business Address:</strong>
+          <%= @user_profile.street_number %> <%= @user_profile.street_name %>, 
+          <%= @user_profile.city %>, <%= @user_profile.postcode %>
+          <%= @user_profile.state %>
+        </p>
+      <% end %>
 
-<% if @user_profile.abn.present? %>
-  <p>
-    <strong>ABN:</strong>
-    <%= @user_profile.abn %>
-  </p>
-<% end %>
+      <% if @user_profile.abn.present? %>
+        <p>
+          <strong>ABN:</strong>
+          <%= @user_profile.abn %>
+        </p>
+      <% end %>
 
-<% if @user_profile.insurance.present? %>
-  <p>
-    <strong>Insurance Number:</strong>
-    <%= @user_profile.insurance %>
-  </p>
-<% end %>
+      <% if @user_profile.insurance.present? %>
+        <p>
+          <strong>Insurance Number:</strong>
+          <%= @user_profile.insurance %>
+        </p>
+      <% end %>
 
-<% if @user_profile.user == current_user && !@user_profile.name.present? && !@user_profile.bio.present? && !@user_profile.contact.present? %>
-  <p>Looks like your profile is incomplete, edit below:</p>
-<% end %>
+      <% if @user_profile.user == current_user && !@user_profile.name.present? && !@user_profile.bio.present? && !@user_profile.contact.present? %>
+        <p>Looks like your profile is incomplete, edit below:</p>
+      <% end %>
+    </div>
 
-<% if current_user == @user_profile.user %>
-  <%= link_to 'Edit Profile', edit_user_profile_path(@user_profile) %> 
-<% end %>
+    <div class="links">
+      <% if current_user == @user_profile.user %>
+      <button>
+        <%= link_to 'Edit Profile', edit_user_profile_path(@user_profile) %> 
+      </button>
+      <% end %>
+      <button>
+        <%= link_to 'Back', :back %> 
+      </button>
+    </div>
+  </div>
 
-<%= link_to 'Back', :back %> 
+</div>
