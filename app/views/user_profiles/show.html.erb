@@ -1,4 +1,6 @@
-<p id="notice"><%= notice %></p>
+<% if @user_profile.name.present? %>
+  <h3>Hi, I'm <%= @user_profile.name %>!</h3>
+<% end %>
 
 <%= image_tag @profile_image, width: '200', border: '1px, solid, black' %>
 
@@ -6,13 +8,6 @@
   <strong>Email:</strong>
   <%= @user_profile.user.email %>
 </p>
-
-<% if @user_profile.name.present? %>
-  <p>
-    <strong>Name:</strong>
-    <%= @user_profile.name %>
-  </p>
-<% end %>
 
 <% if @user_profile.bio.present? %>
   <p>
@@ -51,10 +46,12 @@
   </p>
 <% end %>
 
-<% if !@user_profile.name.present? && !@user_profile.bio.present? && !@user_profile.contact.present? %>
+<% if @user_profile.user == current_user && !@user_profile.name.present? && !@user_profile.bio.present? && !@user_profile.contact.present? %>
   <p>Looks like your profile is incomplete, edit below:</p>
 <% end %>
 
-<% if current_user.id == @user_profile.user.id %>
-  <%= link_to 'Edit', edit_user_profile_path(@user_profile) %> 
+<% if current_user == @user_profile.user %>
+  <%= link_to 'Edit Profile', edit_user_profile_path(@user_profile) %> 
 <% end %>
+
+<%= link_to 'Back', :back %> 
