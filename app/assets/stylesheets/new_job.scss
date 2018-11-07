@@ -1,0 +1,68 @@
+.new-job {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    color: #EE8071;
+    font-size: 16px;
+    line-height: 1.8;
+    .card {
+        background: white;
+        border-radius: 10px;
+        width: 70vw;
+        padding: 50px;
+        margin: 50px;
+        h1 {
+            color: #EE8071;
+            text-align: center;
+        }
+
+        .selectors {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-between;
+            .category-select {
+                color: blue;
+            }
+        }
+        .box {
+            width: 100%;
+            background: #E5E5E5;
+            border: none;
+            border-radius: 5px;
+        }
+       
+        .asdndzone {
+            padding: 3em;
+            border: 1px dashed grey;
+            max-width: 100%;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            // color: #EE8071;
+            background: #E5E5E5;
+
+        }
+        .desc {
+            height: 100px;
+        }
+        .tenant {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-between;
+            .one {
+                display: inline-block;
+                width: 47%;
+            }
+            .two {
+                display: inline-block;
+                width: 47%;
+            }
+            button {
+                border: 1px solid #EE8071;
+                width: 120px;
+                border-radius: 5px;
+                margin-bottom: 10px;
+            }
+        }
+    }
+}

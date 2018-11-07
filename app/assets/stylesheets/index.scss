@@ -49,9 +49,14 @@
         .job {
             max-width: 200px;
         }
+        .links {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
         button {
             border: 1px solid #EE8071;
-            width: 115px;
+            width: 120px;
             border-radius: 5px;
             margin-bottom: 10px;
         }
