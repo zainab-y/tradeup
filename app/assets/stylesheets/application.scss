@@ -38,6 +38,7 @@ body, html {
     position: relative;
     width:100vw;
     left: 0px;
+    right: 0px;
 }
 
 /* Place text in the middle of the image */
@@ -57,7 +58,7 @@ body, html {
 
 h3 {
 
-    font-size: 35px;
+    font-size: 18px;
     line-height: 36px;
     text-align: center;
 }
@@ -80,12 +81,11 @@ h3 {
     background-color: none;
     color: #fff;
   }
-
   .home {
     height: 35vh;
     background-color: white;
     color: #ee7f71;
-    font: 25px;
+    font-size: 25px;
     font-family: 'Playfair Display', serif;
     font-style: bold;
     border-radius: 5px;
@@ -94,11 +94,9 @@ h3 {
     width: 40vw;
     margin-top: 80%;
   }
-
   .grid {
     min-height: 30px;
   }
-
   .button {
     background-color: #EE8071;
     color: #FDFDFD;
@@ -114,8 +112,6 @@ h3 {
   input {
     color: white;
   }
-
-
   #job_category_id {
 
     -webkit-appearance: button;
