@@ -82,7 +82,7 @@ class UserProfilesController < ApplicationController
   # PATCH/PUT /user_profiles/1.json
   def update
     respond_to do |format|
-      if @user_profile.update(user_profile_params) && params[:user_profile][:job_id]
+      if @user_profile.update(user_profile_params) && params[:user_profile][:job_id].present?
         previous_job_id = params[:user_profile][:job_id]
         format.html { redirect_to jobs_accept_path(previous_job_id) }
         format.json { render :show, status: :ok, location: @user_profile }
