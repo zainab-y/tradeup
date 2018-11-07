@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
+gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.2'
 ruby '2.4.1'
 # Dotenv gem
 gem "aws-sdk-s3" 

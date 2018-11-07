@@ -1,0 +1,103 @@
+.tradie-image {
+    /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
+    background-image: url("become_tradie_image.jpg");
+    height: 100vh;
+    min-height: 680px;
+    position: relative;
+    width: 100%;
+    padding: 400;
+    margin: 0;
+    /* Set a specific height */
+    height: 180%;
+    /* Position and center the image to scale nicely on all screens */
+
+    background-repeat: no-repeat;
+    background-size: cover;
+    left: 0px;
+    right: 0px;
+    display: block;
+    min-width: 1128px;
+    box-sizing: border-box;
+  }
+
+  /* Place text in the middle of the image */
+.tradie-text {
+    text-align: center;
+    text-overflow: initial;
+    position: absolute;
+    text-align: justify;
+    top: 100%;
+    left: 5%;
+    height: 110%;
+    transform: translate(-40%, -90%);
+    color: white;
+}
+
+.tradie-form {
+  position: relative;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+button {
+  background: var(--color-buttons-primary-color, #ee7f71) !important;
+  border-radius: 4px;
+
+}
+
+input.commit {
+    text-align: right;
+    cursor: pointer !important;
+    display: inline-block !important;
+    margin: 0px !important;
+    position: relative !important;
+    text-align: center !important;
+    text-decoration: none !important;
+    -webkit-transition-property: background, border-color, color !important;
+    -moz-transition-property: background, border-color, color !important;
+    transition-property: background, border-color, color !important;
+    -webkit-transition-duration: 0.2s !important;
+    transition-duration: 0.2s !important;
+    -webkit-transition-timing-function: ease-out !important;
+    transition-timing-function: ease-out !important;
+    width: auto !important;
+    border-radius: var(--border-button-border-radius, 4px) !important;
+    font-size: var(--font-button-font-size, 16px) !important;
+    line-height: var(--font-button-line-height, 22px) !important;
+    letter-spacing: var(--font-button-letter-spacing, normal) !important;
+    font-family: var(--font-button-font-family, Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif) !important;
+    text-transform: var(--font-button-text-transform, undefined) !important;
+    padding-top: var(--spacing-button-vertical, 12px) !important;
+    padding-bottom: var(--spacing-button-vertical, 12px) !important;
+    font-weight: var(--font-bold-font-weight, 800) !important;
+    border-width: var(--border-button-border-width, 2px) !important;
+    padding-left: var(--spacing-button-horizontal, 24px) !important;
+    padding-right: var(--spacing-button-horizontal, 24px) !important;
+    box-shadow: var(--shadow-button-level0-box-shadow, none) !important;
+    background: var(--color-buttons-primary-color, #ee7f71) !important;
+    border-color: var(--color-buttons-primary-border, transparent) !important;
+    color: var(--color-buttons-primary-text, #ffffff) !important;
+}
+  #form {
+    height: 50vh;
+    background-color: white;
+    color: #ee7f71;
+    font-size: 25px;
+    font-family: 'Playfair Display', serif;
+    font-style: bold;
+    border-radius: 5px;
+    position: sticky;
+    
+  }
+  .tradie {
+    height: 900px;
+    position: absolute;
+    background-color: white;
+    color: #ee7f71;
+    font: 25px;
+    font-family: 'Playfair Display', serif;
+    font-style: bold;
+    border-radius: 5px;
+    margin: 0px;
+  }
+  
