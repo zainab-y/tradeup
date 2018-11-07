@@ -1,12 +1,17 @@
-
+<head><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"></head>
 <div class="brush-image">
     <div class="brush-text">
-      <h3>Need Something fixed?</h3>
-      <%= form_tag new_job_path, method: :get do |form| %>
-        <%= collection_select(:job, :category_id, JobCategory.all, :id, :category, :required => true, :include_blank => true) %>  
-        <br>
-         <button class="button"><%= submit_tag "Create Job" %></button>
-
+        <div class="box home">
+            <div style="margin: auto 1.5em; display: inline-block;">
+            <h3 align= "center">Need Something fixed?</h3>
+            <%= form_tag new_job_path, method: :get do |form| %>
+                <div class="dropdown-content">
+                        <%= collection_select(:job, :category_id, JobCategory.all, :id, :category, :required => true, :include_blank => true) %> 
+                        <br>
+                   <%= submit_tag "Create Job", :class => "button" %></button> 
+                </div>
+            </div>
+        </div>
         <% end %> 
     </div>
 </div>

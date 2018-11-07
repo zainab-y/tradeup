@@ -54,7 +54,9 @@ body, html {
 
 h3 {
 
-    font-size: 40px;
+    font-size: 35px;
+    line-height: 36px;
+    text-align: center;
 }
 
 .bg-container {
@@ -74,4 +76,50 @@ h3 {
     margin: -7px -7px 0;
     background-color: none;
     color: #fff;
+  }
+
+  .home {
+    height: 35vh;
+    background-color: white;
+    color: #ee7f71;
+    font: 25px;
+    font-family: 'Playfair Display', serif;
+    font-style: bold;
+    border-radius: 5px;
+    margin: 0px;
+    position: sticky;
+  }
+
+  .grid {
+    min-height: 30px;
+  }
+
+  .button {
+    background-color: #EE8071;
+    font-color: #FDFDFD;
+    width: 300px;
+    font-family: 'Times New Roman', Times, serif;
+    font-style: normal;
+    font-weight: normal;
+    line-height: normal;
+    font-size: 24px;
+  }
+
+
+  #job_category_id {
+
+    -webkit-appearance: button;
+   -webkit-border-radius: 2px;
+   -webkit-padding-end: 20px;
+   -webkit-user-select: none;
+   background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
+   background-position: 97% center;
+   background-repeat: no-repeat;
+   color: #C4C4C4;
+   font-size: inherit;
+   overflow: hidden;
+   padding: 5px 10px;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+   width: 300px;
   }
