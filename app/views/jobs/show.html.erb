@@ -112,6 +112,10 @@
   <% end %>
 <% end %>
 
+<% if @job_status == 3 && @is_job_acceptor %>
+  <%= link_to "Back to Home", root_path %>
+<% end %>
+
 <%#The following two links are unnecessary here since they are at the navbar already%>
 <% if false %>
   <%= link_to 'View All Jobs', jobs_path %>

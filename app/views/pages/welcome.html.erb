@@ -1,12 +1,11 @@
-
 <div class="brush-image">
     <div class="brush-text">
       <h3>Need Something fixed?</h3>
+      <%= label_tag :category, "Choose a category:" %>
       <%= form_tag new_job_path, method: :get do |form| %>
         <%= collection_select(:job, :category_id, JobCategory.all, :id, :category, :required => true, :include_blank => true) %>  
         <br>
          <button class="button"><%= submit_tag "Create Job" %></button>
-
         <% end %> 
     </div>
 </div>
