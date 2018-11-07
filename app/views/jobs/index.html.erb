@@ -10,8 +10,8 @@
       <%= label_tag :postcode %> 
       <%= text_field_tag :postcode, value = nil, options = {class: "box"} %>
     </div>
-    <%= submit_tag "Search" %>
-    <%= link_to "Clear", jobs_path %>
+      <%= submit_tag "Search" %>
+      <%= link_to "Clear", jobs_path %>
     <% end %>
 
     <%# search result message %>
@@ -26,7 +26,7 @@
         <% else %>
           <%= image_tag "https://api.adorable.io/avatars/200/#{job.users.first.username}", :class => "profile"%>
         <% end%>
-        <a href=“user_profiles/<%=job.users.first.user_profile.id%>“>
+        <a href="user_profiles/<%=job.users.first.user_profile.id%>">
              Job by <%= job.users.first.username %>
            </a>
       </div>
@@ -39,10 +39,16 @@
       </div>
           <%# links %>
       <div class="links">
-        <p><%= link_to 'Check Details', job %></p>
+        <button>
+          <p><%= link_to 'Check Details', job %></p>
+        </button>
         <% if !current_user.nil? && current_user.id == job.users.first.id %>
-          <p><%= link_to 'Edit', edit_job_path(job) %></p>
-          <p><%= link_to 'Delete', job, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+          <button>
+            <p><%= link_to 'Edit', edit_job_path(job) %></p>
+          </button>
+          <button>
+            <p><%= link_to 'Delete', job, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+          </button>
         <% end %>
       </div>
     </div>

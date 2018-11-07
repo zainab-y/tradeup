@@ -1,0 +1,37 @@
+.user-profile {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    h3 {
+        color: #EE8071;
+        width: 100vw;
+    }
+    .card {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-around;
+        width: 70vw;
+        background: white;
+        border-radius: 10px;
+        padding: 50px;
+        .image {
+            border-radius: 150px;
+        }
+        .details {
+           p {
+               font-size: 18px;
+           }
+        }
+        .links {
+            width: 100vw;
+            margin-left: 35%;
+            padding: 20px;
+            button {
+                border: 1px solid #EE8071;
+                width: 115px;
+                border-radius: 5px;
+                margin-bottom: 10px;
+            }
+        }
+    }
+}
