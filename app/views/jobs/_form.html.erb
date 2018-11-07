@@ -2,7 +2,6 @@
   <% if job.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(job.errors.count, "error") %> prohibited this job from being saved:</h2>
-
       <ul>
       <% job.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -37,9 +36,14 @@
   </div>
 
   <%= form.label :address, "Address of the property: *"%> 
-  <div id="locationField">
+  <% if params[:action] == "edit" %>
+    <input id="autocomplete" placeholder="<%= job.street_number %> <%= job.street_name %>, <%= job.city %>, <%= job.postcode %> <%= job.state%>" type="text" style="width:500px;"></input>
+  <% else %>
+    <div id="locationField">
       <input id="autocomplete" placeholder="Enter peoperty address" type="text" style="width:500px;"></input>
   </div>
+  <% end %>
+  
 
   <div class="field">
     <%# <%= form.label :street_number %> 
@@ -75,6 +79,7 @@
     <%= form.label :images, "Images:" %>
     (this will assist the tradesman to assess the job prior to attendance):  
     <%# <%= form.file_field :images, multiple: true %>
+  
     <div class="drag_and_drop dash-area">
       <%= form.drag_and_drop_file_field :images, multiple: true %>
     </div>
