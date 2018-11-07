@@ -2,8 +2,10 @@ class JobsController < ApplicationController
   before_action :set_job, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show, :new]
   after_action :create_user_job, only: [:create]
-  before_action :is_trader?, only: [:accept]
   before_action :registered_user?, only: [:new]
+  before_action :profile_complete?, only: [:new]
+  before_action :is_trader?, only: [:accept]
+
 
   # GET /jobs
   # GET /jobs.json
@@ -175,15 +177,27 @@ class JobsController < ApplicationController
     end
 
     def is_trader?
-      user = current_user.user_profile
-      if user.abn.nil? && user.insurance.nil?
-        redirect_to edit_user_profile_path(user.id, :abn_insurance => 0, :job_id => params[:job_id])
+      user_profile = current_user.user_profile
+      if !user_profile.abn.present? || !user_profile.insurance.present?
+        redirect_to edit_user_profile_path(user_profile.id, :abn_insurance => 0, :job_id => params[:job_id])
+      end
+    end
+
+    def profile_complete?
+      user_profile = current_user.user_profile
+      if !user_profile.name.present? || !user_profile.contact.present? || !user_profile.street_number.present? || !user_profile.business_name.present?
+        if params[:job] && params[:job][:category_id]
+          redirect_to edit_user_profile_path(user_profile.id, :job_category => params[:job][:category_id])
+        elsif params[:job_category]
+          redirect_to edit_user_profile_path(user_profile.id, :job_category => params[:job_category])
+        else
+          redirect_to edit_user_profile_path(user_profile.id, :job_new => 0)
+        end
       end
     end
 
     def registered_user?
-      if current_user
-      else
+      if !current_user
         redirect_to new_user_registration_path(:job_category => params[:job][:category_id])
       end
     end

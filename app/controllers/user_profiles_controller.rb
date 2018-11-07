@@ -86,6 +86,12 @@ class UserProfilesController < ApplicationController
         previous_job_id = params[:user_profile][:job_id]
         format.html { redirect_to jobs_accept_path(previous_job_id) }
         format.json { render :show, status: :ok, location: @user_profile }
+      elsif @user_profile.update(user_profile_params) && params[:user_profile][:job_new]
+        format.html { redirect_to new_job_path }
+        format.json { render :show, status: :ok, location: @user_profile }
+      elsif @user_profile.update(user_profile_params) && params[:user_profile][:job_category]
+        format.html { redirect_to new_job_path(:job_category => params[:user_profile][:job_category]) }
+        format.json { render :show, status: :ok, location: @user_profile }
       elsif @user_profile.update(user_profile_params)
         format.html { redirect_to @user_profile, notice: 'User profile was successfully updated.' }
         format.json { render :show, status: :ok, location: @user_profile }
