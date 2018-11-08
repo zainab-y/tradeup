@@ -12,7 +12,6 @@
   <% end %>
 
   <h4>Please complete your profile first</h4>
-  <br>
   <p>* indicates required field</p>
 
   <div class="field">
@@ -22,30 +21,32 @@
 
   <div class="field">
     <%= form.label :name, "Full Name: *" %>
-    <%= form.text_field :name, :required => true %>
+    <%= form.text_field :name, :required => true, :class => "box" %>
   </div>
 
   <div class="field">
     <%= form.label :bio, "Say something about yourself: "%>
-    <%= form.text_area :bio %>
+    <%= form.text_area :bio, :class => "box bio" %>
   </div>
 
-  <div class="field">
-    <%= form.label :business_name, "Business Name: *" %>
-    <%= form.text_field :business_name, :required => true %>
-  </div>
+  <div class="container">
+    <div class="one">
+      <%= form.label :business_name, "Business Name: *" %>
+      <%= form.text_field :business_name, :required => true, :class => "box" %>
+    </div>
 
-  <div class="field">
-    <%= form.label :contact, "Business Contact Number: *" %>
-    <%= form.text_field :contact, :required => true %>
+    <div class="two">
+      <%= form.label :contact, "Business Contact Number: *" %>
+      <%= form.text_field :contact, :required => true, :class => "box" %>
+    </div>
   </div>
 
   <%= form.label :address, "Business address: *" %>
   <div id="locationField">
-    <input id="autocomplete" placeholder="Enter your address" type="text" style="width:500px;"></input>
+    <input id="autocomplete" placeholder="Enter your address" type="text" class="box"></input>
   </div>
 
-    <div class="field">
+  <div class="field">
     <%# <%= form.label :street_number %> 
     <%= form.hidden_field :street_number, id: 'street_number', maxlength: 10, :required => true %>
   </div>
@@ -83,15 +84,17 @@
   <%# If they want to accept a job and dont have tradie status this will show %>
 
   <% if params[:abn_insurance] %>
-    <h2>We require the below details before you can accept this job: </h2>
-    <div class="field">
-        <%= form.label :abn, "Your ABN: *" %>
-        <%= form.text_field :abn, maxlength: 11, :required => true %>
-    </div>
+    <h2>We require the below details before you can accept jobs: </h2>
+    <div class="container">
+      <div class="one">
+          <%= form.label :abn, "Your ABN: *" %>
+          <%= form.text_field :abn, maxlength: 11, :required => true, :class => "box" %>
+      </div>
 
-    <div class="field">
-        <%= form.label :insurance, "Business Insuarnce Number: *"%>
-        <%= form.text_field :insurance, :required => true %>
+      <div class="two">
+          <%= form.label :insurance, "Business Insuarnce Number: *"%>
+          <%= form.text_field :insurance, :required => true, :class => "box" %>
+      </div>
     </div>
 
     <%= form.hidden_field :abn_insurance, value: 0 %>
@@ -101,20 +104,21 @@
   <%# if statement will only let them edit this field if it is not nil %>
   <% if !current_user.user_profile.abn.nil? && !current_user.user_profile.insurance.nil? %>
     <p>Requirements for trades people:</p>
-    <div class="field">
-        <%= form.label :abn %> 
-        <%= form.text_field :abn %>
-    </div>
+    <div class="container">
+      <div class="one">
+          <%= form.label :abn %> 
+          <%= form.text_field :abn, :class => "box" %>
+      </div>
 
-    <div class="field">
-        <%= form.label :insurance %>
-        <%= form.text_field :insurance %>
+      <div class="two">
+          <%= form.label :insurance %>
+          <%= form.text_field :insurance, :class => "box" %>
+      </div>
     </div>
   <% end  %>
-  
+  <br>
   <div class="actions">
-      <button type="update-button"><%= form.submit "Update", :class => "commit" %></button>
-    
+      <button type="update-button"><%= form.submit "Update", :class => "inner-button" %></button>
   </div>
 <% end %>
 
