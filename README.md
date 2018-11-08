@@ -101,14 +101,13 @@ Once the job is completed you can log in an head to my jobs console where you ca
 
 # Design documentation including,
 ## Design process
-###Moodboard
+##Moodboard
 ![Alt text](./docs/moodboard-tradeup.jpg "Moodboard")
 
-###
-Colour palette
+## Colour palette
 ![Alt text](./docs/colour-palette.png "Colour palette")
 
-###Logo
+## Logo
 ![Alt text](./docs/tradeup_logo.png "Logo")
 
 ## User stories / A workflow diagram of the user journey's 
@@ -131,7 +130,11 @@ Colour palette
 | Day 9 | Testing. Complete ReadMe. Power Point presentation.     |
 | Day 10 | Submit assignment.      |
 
-##Our Trello
+###Group communication
+![alt text](./docs/the_three_sisters.png)
+![alt text](./docs/the_three_sisters2.png)
+
+###Our Trello
 https://trello.com/b/AQ31YGK7/rails-project
 
 ![Alt text](./docs/trello-tradeup.jpg "Trello")
@@ -139,19 +142,20 @@ https://trello.com/b/AQ31YGK7/rails-project
 # Important Lessons We Learnt & Future Builds
 
 # Questions
+
 1. What is the need (i.e. challenge) that you will be addressing in your project?
 
 The real estate industry is one of the largest industry in Australia. In saying that, we would like to assist property managers to find tradespeople when all their regular tradespeople are too busy or unable to attend as soon as required. 
 
-We are also creating a platform for trades people who are able to go to to earn some extra money if they happen to have the time.
+We are also creating a platform for tradespeople who are able to go to to earn some extra money if they happen to have the time.
 
 2. Identify the problem you’re trying to solve by building this particular marketplace App? Why is it a problem that needs solving?
 
-The problems we are trying to solve is where property managers often it difficult to get a tradesperson to perform a task due to reasons such as little pay, short time, limited reach of tradespeople and their unavailability, especially during peak season. 
+The problems we are trying to solve is where property managers often find it difficult to get a tradesperson to perform a task due to reasons such as little pay, short time, limited reach of tradespeople and their unavailability, especially during peak season. 
 
 By solving this, there is more efficiency and less time chasing up leads as the application will cut off time being used to find a tradesperson. 
 
-3. Describe the project you will be conducting and how. your App will address the needs.
+3. Describe the project you will be conducting and how your App will address the needs.
 
 Along with it being a platform to connect maintenance which needs fixing and tradespeople with spare time. We will also be providing a place to compile maintenance jobs in an easy to manage and user friendly way. 
 
@@ -159,7 +163,7 @@ We all know a property manager who struggles with ensuring maintenance is done, 
 
 With our app we will simplify this and generate a page where both property managers and trades people can go to and immediately can identify outstanding jobs, jobs to be paid, etc.
 
-Ideally Property managers will even encourage their regular trades people to accept jobs through our app
+Ideally property managers will even encourage their regular tradespeople to accept jobs through our app.
 
 4. Describe the network infrastructure the App may be based on.
 
@@ -167,10 +171,10 @@ Considering this is a two-sided marketplace, the network infrastructure would mo
 
 By having Wi-Fi we can give to users we can deliver a service to them. We can also monitor traffic, trends and user information to make sure that your service is successful.
 
-1. Identify and describe the software to be used in your App.
+5. Identify and describe the software to be used in your App.
 
 - HTML is used in conjunction with embedded ruby in the view of the application.
-- CSS is used in the styling of the application, it aids in user friendliness and visual appeal.
+- SCSS is used in the styling of the application, it aids in user friendliness and visual appeal.
 - Ruby is used in the controllers of the application 
 - Ruby on Rails is the framework used for the basis of the app.
 - Java Script - some JavaScript was used to configure some of the gems used.
@@ -190,6 +194,9 @@ SQLite's disadvantage to this is that we could not be able to tinker the design 
 7. Identify and describe the production database setup (i.e. postgres instance).
 
 Here I would talk about the specifics of postgres, how it connects to your models, how it sits in overall MVC
+
+In our schema database we have eight tables. 
+A User_profile table that stores the user's "name", "contact", "business_name" etc. 
 
 8. Describe the architecture of your App.
 
@@ -274,9 +281,16 @@ We seperated our ERD with two colours the pink is to be our MVP what we would ai
 1.   Provide User stories for your App.
 2.   Provide Wireframes for your App.
 3.   Describe the way tasks are allocated and tracked in your project.
-4.   Discuss how Agile methodology is being implemented in your project.
-5.  Provide an overview and description of your Source control process.
-6.  Provide an overview and description of your Testing process.
+4.   Discuss how Agile methodology is being implemented in your project.                                                                    We have implemented Agile methodology called Scrum. We have done       this by using Trello board as a tool to assist us in tracking and      performing tasks that are broken down into small parts.
+     
+     We used slack to communicate with eachother about our project when we were not together and to show and send links.
+
+     Our group agreed on having Lili as a our scrum master. Every morning and before finishing the day, we would go plan, work and reflect on what we were going to do and what we have done.
+
+     We would ask questions like, "Does this feature help develop what the client wants?", "Is our design meaningful to the client?" etc.
+
+5.   Provide an overview and description of your Source control process.
+6.   Provide an overview and description of your Testing process.
 
 Once we reached MVP we went through the app as a user would. We checked each link to ensure it didnt return an error and that the routing was correct. 
 
@@ -284,26 +298,28 @@ We then requested feedback from fellow students to ensure that the interface was
 
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 
-21.  Discuss and analyse requirements related to information system security.
+1.   Discuss and analyse requirements related to information system security.
 
-Make this a more general analysis of the ethics behind handling user data.
+Authentication is one of the ways in which we have implemented into our project as an information system security. A user can access their own account without having someone else being able to access it too. We have used confirmation emails to authenticate a user as well with Devise.
 
-22. Discuss methods you will use to protect information and data.
+Our group has also discussed security and safety issues when validating a tradesperson's licence. It's not wise to have tradespeople with no real qualifications and licence to do the job if it means putting others at risk. A form could be developed in the future where their credentials would be checked.
 
-Our app collects the user’s name, email, password, physical address and phone number. 
+1.   Discuss methods you will use to protect information and data.
 
-The methods we have implemented for information security purposes include: user authentication, functional level access control and password encryption using devise and pundit. Users can make payment on our app but it’s handled by Stripe so we are not storing any sensitive data relating to the payment.
+Our app collects the user’s name, email, password, physical address and phone number. The methods we have implemented for information security purposes include: user authentication, functional level access control and password encryption using devise and pundit. Users can make payment on our app but it’s handled by Stripe so we are not storing any sensitive data relating to the payment.
 
-22. Research what your legal obligations are in relation to handling user data.
+We also don't collect data to release to third-parties and through Heroku, we are provided SSL where our user's data is being protected from the server to their computer.
+
+1.  Research what your legal obligations are in relation to handling user data.
 
 Legal obligations for handling user data differ from the laws of each country and depending on where your user(s) are from. In Australia, users are protected by the Privacy Act 1988(Privacy Act), which outlines how an organisation or business must do to handle, use and manage user data.
 
-Australian Privacy Principles(APPs) is found under the Privacy Act:
-” - the open and transparent management of personal information including having a privacy policy
+Australian Privacy Principles(APPs) is found under the Privacy Act: "
+⋅⋅* the open and transparent management of personal information including having a privacy policy
 ⋅⋅* an individual having the option of transacting anonymously or using a pseudonym where practicable
 ⋅⋅* the collection of solicited personal information and receipt of unsolicited personal information including giving notice about collection
 ⋅⋅* how personal information can be used and disclosed (including overseas)
 maintaining the quality of personal information
 ⋅⋅* keeping personal information secure
-⋅⋅* right for individuals to access and correct their personal information”
+⋅⋅* right for individuals to access and correct their personal information. ”
 [I'm an inline-style link](https://www.oaic.gov.au/privacy-law/privacy-act/australian-privacy-principles)
