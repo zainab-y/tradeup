@@ -1,6 +1,12 @@
 <div class="my-job">
 
-    <h1 class="title">My Jobs</h1>
+    <div class="title">
+        <h1>My Jobs</h1>
+
+        <% if @my_jobs.count == 0 && @is_job_creator_completed.count == 0 && @is_job_creator_paid.count == 0 && @accepted_jobs.count == 0 &&  @is_job_acceptor_completed.count == 0 && @is_job_acceptor_paid.count == 0 %>
+            <h3>You have no current jobs.</h3>
+        <% end %>
+    </div>
 
     <% if @my_jobs.count > 0 %>
         <div class="jobs-i-created">

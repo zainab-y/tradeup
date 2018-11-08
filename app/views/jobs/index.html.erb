@@ -3,17 +3,16 @@
   <div class="search">
     <%= form_tag jobs_path, method: :get do %>
     <div class="field">
-      <%= label_tag :category %>
-      <%= collection_select(:job, :category_id, JobCategory.all, :id, :category, {:prompt => true}, {:class=>'box category'}) %> 
+      <%= label_tag :category %><br>
+      <%= collection_select(:job, :category_id, JobCategory.all, :id, :category, {:prompt => true}, {:class=>"box category"}) %> 
     </div>
     <div class="field">
-      <%= label_tag :postcode %> 
-      <%= text_field_tag :postcode, value = nil, options = {class: "box"} %>
+      <%= label_tag :postcode %> <br>
+      <%= text_field_tag :postcode, value = nil, options = {class: "box postcode"} %>
     </div>
       <%= submit_tag "Search" %>
       <%= link_to "Clear", jobs_path %>
     <% end %>
-
     <%# search result message %>
     <p><%= @message %></p>
   </div>

@@ -1,19 +1,27 @@
 <%- if controller_name != 'sessions' %>
   <% if params[:job_category] %>
+    <div class="button">
     <%= link_to "Log in", new_session_path(resource_name, :job_category => params[:job_category], :postcode => params[:postcode] )%> <br />
+    </div>
   <% elsif params[:become_tradie]%>
+  <div class="button">
     <%= link_to "Log in", new_session_path(resource_name, :become_tradie => 0) %>
+  </div>
   <% else %>
+  <div class="button">
     <%= link_to "Log in", new_session_path(resource_name) %><br />
+  </div>
   <% end %>
 <% end -%>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <%= link_to "Sign up", new_registration_path(resource_name) %><br />
+  <div class="button">
+    <%= link_to "Sign up", new_registration_path(resource_name) %><br />
+  </div>
 <% end -%>
 
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-  <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
+    <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
 <% end -%>
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
@@ -26,6 +34,8 @@
 
 <%- if devise_mapping.omniauthable? %>
   <%- resource_class.omniauth_providers.each do |provider| %>
-    <%= link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider) %><br />
+    <div class="button">  
+      <%= link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider) %>
+      </div><br />
   <% end -%>
 <% end -%>
