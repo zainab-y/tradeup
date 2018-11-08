@@ -89,7 +89,7 @@ Unfortunetly this feature which we included for better user experience did not i
                 ⋅⋅* mailer -gem
   
 # Instructions on how to setup, configure and use your App.
-
+ 
 To use our app you simply follow the link above to our published app. 
 
 Without signing in/signing up you only have the ability to view current jobs listed. 
@@ -119,9 +119,11 @@ Once the job is completed you can log in an head to my jobs console where you ca
 # Design documentation including,
 ## Design process
 ##Moodboard
+
 ![Alt text](./docs/moodboard-tradeup.jpg)
 
 ## Colour palette
+
 ![Alt text](./docs/colour-palette.png)
 
 ## Logo
