@@ -23,6 +23,28 @@
                 border: none;
             }
         }
+        button {
+            border: 1px solid #EE8071;
+            width: 70px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            text-align: center;
+            padding: 5px;
+            .inner-button {
+                color: #EE8071;
+                border: none;
+                font-size: 16px;
+                padding: 0px;
+                margin: 0px;
+                line-height: 0px;
+                height: 15px;
+            }
+            &:hover {
+                cursor: pointer;
+                opacity: 0.5;
+                font-size: 18px;
+            }
+        }
     }
 
     .postcode {
