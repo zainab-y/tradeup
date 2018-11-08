@@ -83,8 +83,17 @@ Once the job is completed you can log in an head to my jobs console where you ca
 
 # Design documentation including,
 ## Design process
+###Moodboard
+![Alt text](app/assets/images/moodboard-tradeup.jpgassets/images/moodboard-tradeup.jpg?raw=true "Moodboard")
+
+###Logo
+
 ## User stories / A workflow diagram of the user journey's 
+
 ## Wireframes
+###Trello
+https://trello.com/b/AQ31YGK7/rails-project
+
 ## Database Entity Relationship Diagrams
 # Details of planning process including,
 ## Project plan & timeline

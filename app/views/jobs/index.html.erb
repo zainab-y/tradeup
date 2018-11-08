@@ -1,57 +1,57 @@
-<h2>Job Search</h2>
-<%= form_tag jobs_path, method: :get do %>
-<%= label_tag :category %>
-<%= collection_select(:job, :category_id, JobCategory.all, :id, :category, :prompt => true) %> 
-<%= label_tag :postcode %> 
-<%= text_field_tag :postcode %>
-<%= submit_tag "Search" %>
-<%= link_to "Clear", jobs_path %>
-<% end %>
+<div class="index">
 
-<%# search result message %>
-<p><%= @message %></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Category</th>
-      <th>Postcode</th>
-      <th>Price</th>
-      <th>Time</th>
-      <th>Title</th>
-      <%# <th>Job Location</th>
-      <th>Creator</th>
-      <th>Job Status</th> %>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @jobs.each do |job| %>
-      <tr>
-        <td><%= job.job_category.category %></td>
-        <td><%= job.postcode %></td>
-        <td><%= number_to_currency(job.price/100.0) %></td>
-        <td><%= job.tenant_available_time %></td>
-        <td><%= job.title %></td>
-        <%# to comment out the info we currently don't wanna show %>
-        <% if false %>
-          <td><%= job.city %>, <%= job.state %></td>
-          <td>
-            <a href="user_profiles/<%=job.users.first.user_profile.id%>">
-              <%= job.users.first.username %>
-            </a>
-          </td>
-          <td><%= job.job_status.status.capitalize %></td>
-        <% end %>
-
-        <%# links %>
-        <td><%= link_to 'Job Details', job %></td>
-        <% if !current_user.nil? && current_user.id == job.users.first.id %>
-          <td><%= link_to 'Edit', edit_job_path(job) %></td>
-          <td><%= link_to 'Delete', job, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
-      </tr>
+  <div class="search">
+    <%= form_tag jobs_path, method: :get do %>
+    <div class="field">
+      <%= label_tag :category %>
+      <%= collection_select(:job, :category_id, JobCategory.all, :id, :category, {:prompt => true}, {:class=>'box category'}) %> 
+    </div>
+    <div class="field">
+      <%= label_tag :postcode %> 
+      <%= text_field_tag :postcode, value = nil, options = {class: "box"} %>
+    </div>
+      <%= submit_tag "Search" %>
+      <%= link_to "Clear", jobs_path %>
     <% end %>
-  </tbody>
-</table>
+
+    <%# search result message %>
+    <p><%= @message %></p>
+  </div>
+
+  <% @jobs.each do |job| %>
+    <div class="card">
+      <div class="picture">
+        <% if job.users.first.user_profile.image.attached? %>
+          <%= image_tag job.users.first.user_profile.image, :class => "profile"%>
+        <% else %>
+          <%= image_tag "https://api.adorable.io/avatars/200/#{job.users.first.username}", :class => "profile"%>
+        <% end%>
+        <a href="user_profiles/<%=job.users.first.user_profile.id%>">
+             Job by <%= job.users.first.username %>
+           </a>
+      </div>
+      <div class="job">
+        <p>Category: <%= job.job_category.category %></p>
+        <p>Location: <%= job.city %>, <%= job.postcode %></p>
+        <p>Price: <%= number_to_currency(job.price/100.0) %></p>
+        <p>Time: <%= job.tenant_available_time %></p>
+        <p>Title: <%= job.title %></p>
+      </div>
+          <%# links %>
+      <div class="links">
+        <button>
+          <p><%= link_to 'Check Details', job %></p>
+        </button>
+        <% if !current_user.nil? && current_user.id == job.users.first.id %>
+          <button>
+            <p><%= link_to 'Edit', edit_job_path(job) %></p>
+          </button>
+          <button>
+            <p><%= link_to 'Delete', job, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+          </button>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+<div>

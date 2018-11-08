@@ -1,5 +1,11 @@
-<h1>Create a New Job</h1>
+<div class="new-job">
+    <div class="card">
+        <h1>Create a New Job</h1>
 
-<%= render 'form', job: @job %>
-<br>
-<%= link_to 'Back', jobs_path %>
+        <%= render 'form', job: @job %>
+        <br>
+        <button>
+            <%= link_to 'Back', jobs_path %>
+        </button>
+    </div>
+</div>

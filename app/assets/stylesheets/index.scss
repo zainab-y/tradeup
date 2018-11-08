@@ -1,0 +1,64 @@
+.index {
+    display: flex;
+    flex-direction: column;
+    h1 {
+        font-size: 20px;
+    }
+
+    .search {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        .field {
+            display: inline-block;
+            margin: 50px;
+            align-self: flex-end;
+            color: #EE8071;
+            .box {
+                background: white;
+                width: 300px;
+                height: 30px;
+                border-radius: 5px;
+                border: none;
+            }
+        }
+    }
+
+    .card{
+        background-color: white;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        width: 70vw;
+        margin-left: 15vw;
+        margin-bottom:10px;
+        padding: 10px;
+        p {
+            margin: 0;
+        }
+        .profile {
+            border-radius: 100px;
+            width: 70px;
+        }
+        .picture {
+            align-self: center;
+            display:flex;
+            flex-direction: column;
+        }
+        .job {
+            max-width: 200px;
+        }
+        .links {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        button {
+            border: 1px solid #EE8071;
+            width: 120px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+    }
+}
