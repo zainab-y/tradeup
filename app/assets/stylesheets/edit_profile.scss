@@ -1,0 +1,66 @@
+.edit-page {
+    background-image: url("become_tradie_image.jpg");
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    position: relative;
+    background-position: center;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    line-height: 1.5;
+    h4 {
+    color: #EE8071;
+        margin: 0px;
+    }
+    .card {
+        background: white;
+        width: 50vw;
+        border-radius: 5px;
+        color: #EE8071;
+        margin-left: 15vw;
+        padding-left: 20px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        .box {
+            width: 100%;
+            background: #E5E5E5;
+            border: none;
+            border-radius: 5px;
+        }
+        .bio {
+            height: 100px;
+        }
+        .container {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-between;
+            .one {
+                width: 48%;
+            }
+            .two {
+                width: 48%;
+            }
+        }
+        button {
+            border: 1px solid #EE8071;
+            width: 40%;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            text-align: center;
+            padding: 5px;
+            .inner-button {
+                color: #EE8071;
+                border: none;
+                font-size: 16px;
+                padding: 0px;
+                margin: 0px;
+                line-height: 0px;
+            }
+            :hover {
+                cursor: pointer;
+            }
+        }
+
+    }
+}
