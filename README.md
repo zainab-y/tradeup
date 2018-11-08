@@ -84,15 +84,18 @@ Once the job is completed you can log in an head to my jobs console where you ca
 # Design documentation including,
 ## Design process
 ###Moodboard
-![Alt text](app/assets/images/moodboard-tradeup.jpgassets/images/moodboard-tradeup.jpg?raw=true "Moodboard")
+![Alt text](./docs/moodboard-tradeup.jpg "Moodboard")
+
+###
+Colour palette
+![Alt text](./docs/colour-palette.png "Colour palette")
 
 ###Logo
+![Alt text](./docs/tradeup_logo.png "Logo")
 
 ## User stories / A workflow diagram of the user journey's 
 
 ## Wireframes
-###Trello
-https://trello.com/b/AQ31YGK7/rails-project
 
 ## Database Entity Relationship Diagrams
 # Details of planning process including,
@@ -110,7 +113,11 @@ https://trello.com/b/AQ31YGK7/rails-project
 | Day 9 | Testing. Complete ReadMe. Power Point presentation.     |
 | Day 10 | Submit assignment.      |
 
-## Screenshots of Trello board(s)
+##Our Trello
+https://trello.com/b/AQ31YGK7/rails-project
+
+![Alt text](./docs/trello-tradeup.jpg "Trello")
+
 
 # Important Lessons We Learnt & Future Builds
 
