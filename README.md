@@ -1,9 +1,13 @@
 # README
 
 # A link (URL) to your published App
-https://lit-spire-85165.herokuapp.com/
+⋅⋅* https://lit-spire-85165.herokuapp.com/
+
 # A link to your GitHub repository
-https://github.com/lilianamolloy/tradeup
+⋅⋅* https://github.com/lilianamolloy/tradeup
+⋅⋅* https://github.com/Aitzu/tradeup
+⋅⋅* https://github.com/zainab-y/tradeup
+
 # Description of the project TradeUp
 ## Problem definition / purpose
 
