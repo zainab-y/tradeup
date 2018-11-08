@@ -247,12 +247,12 @@ The user has one user profile. This is generated after user registration is comp
 
 We seperated our ERD with two colours the pink is to be our MVP what we would aim to complete by the due date. The orange represents additional features we might add on should we have the time.
 
-15.  Provide User stories for your App.
-16.  Provide Wireframes for your App.
-17.  Describe the way tasks are allocated and tracked in your project.
-18.  Discuss how Agile methodology is being implemented in your project.
-19. Provide an overview and description of your Source control process.
-20. Provide an overview and description of your Testing process.
+1.   Provide User stories for your App.
+2.   Provide Wireframes for your App.
+3.   Describe the way tasks are allocated and tracked in your project.
+4.   Discuss how Agile methodology is being implemented in your project.
+5.  Provide an overview and description of your Source control process.
+6.  Provide an overview and description of your Testing process.
 
 Once we reached MVP we went through the app as a user would. We checked each link to ensure it didnt return an error and that the routing was correct. 
 

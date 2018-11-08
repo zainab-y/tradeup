@@ -10,7 +10,9 @@
       <%= label_tag :postcode %> <br>
       <%= text_field_tag :postcode, value = nil, options = {class: "box postcode"} %>
     </div>
-      <%= submit_tag "Search" %>
+      <button class="submit">
+      <%= submit_tag "Search", :class => "inner-button" %>
+      </button>
       <%= link_to "Clear", jobs_path %>
     <% end %>
     <%# search result message %>
