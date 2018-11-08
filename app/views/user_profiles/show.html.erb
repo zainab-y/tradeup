@@ -1,6 +1,6 @@
 <div class="user-profile">
     <% if @user_profile.name.present? %>
-      <h3>Hi, I'm <%= @user_profile.name %>!</h3>
+      <h3>Hi, I'm <%= @user_profile.name.capitalize %>!</h3>
     <% else %>
       <h3></h3>
     <% end %>
