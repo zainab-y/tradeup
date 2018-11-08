@@ -8,7 +8,6 @@
                     <%= collection_select(:job, :category_id, JobCategory.all, :id, :category, :required => true, :include_blank => true) %> 
                     <br><br>
                     <%= submit_tag "Create Job", :class => "button" %>
-
             </div>
         <% end %> 
     </div>
